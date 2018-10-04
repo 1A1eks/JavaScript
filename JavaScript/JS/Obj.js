@@ -2,14 +2,14 @@ var character = {name : "", age : 0, itemsToGive : []};
 
 const giveItem  = (character) => {return(character.itemsToGive)};
 
-var item = {
-    "name" : "",
-    "str" : 0,
-    "magic" : 0,
-    "minlvl" : 0,
-    "price" : 0,
-    "available" : false
-};
+function item  (name, str, magic, minlvl, price, available) {
+    this.name = name,
+    this.str = str,
+    this.magic = magic,
+    this.minlvl = minlvl,
+    this.price = price,
+    this.available = available
+}
 
 const generateName = () => {
     let name = "";
@@ -22,16 +22,16 @@ const generateName = () => {
 
  const basicStatGen = () => {
 
-    let number = Math.ceil()*9;
+    let number = Math.ceil(Math.random()*9);
     return(number);
 };
 
 const createItem = () => {
-    new Item = {generateName(), (Math.ceil()*9), (Math.ceil()*9), (Math.ceil()*9), (Math.ceil()*99), true};
-
+    let iteeem = new item (generateName(), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*99), true);
+    return(iteeem);
 };
 
-var shop = [];
+var shop = new Array (5);
 
 const initiateShop = () => {
     if (shop.length<2){
@@ -43,31 +43,26 @@ const initiateShop = () => {
 
 const fillShop = () => {
     let j = 0
-    for ( i ; i<shop.length; i++){
+    for (let i = 0 ; i<shop.length; i++){
         if(shop[i]===undefined){
             shop[i] = createItem();
         }
     }
-    if (shop[i])
+    
+
+    
 };
 
-var player = {
-    "name" : "",
-    "lvl" : 0,
-    "hp" : 1,
-    "str" : 0,
-    "vit" : 0,
-    "magic" : 0, 
-    "int" : 0,
-    "luck" : 0,
-    "closeToLvlUp" : false,
-    "equipment" : {
-        head : {};,
-        arms : {};,
-        lefthand : {};,
-        righthand : {};,
-        chest : {};,
-        legs : {};,
-        feet : {};,
-         };
-};
+function player (name, lvl, hp, str, vit, magic, int, luck, closeToLvlUp, lefthand, righthand) {
+    this.name = name,
+    this.lvl = lvl,
+    this.hp = hp,
+    this.str = str,
+    this.vit = vit,
+    this.magic = magic, 
+    this.int = int,
+    this.luck = luck,
+    this.closeToLvlUp = closeToLvlUp,
+    this.lefthand = lefthand,
+    this.righthand = righthand        
+}
