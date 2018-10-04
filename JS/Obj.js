@@ -15,7 +15,7 @@ const generateName = () => {
     let name = "";
     let length = 4+Math.ceil(Math.random()*6);
     for (let i=0;i<length;i++) {
-        name += String.fromCharCode("a".charCodeAt(0) + Math.floor(Math.random()*27))
+        name += String.fromCharCode("a".charCodeAt(0) + Math.floor(Math.random()*26))
     }
     return(name);
 };
