@@ -1,5 +1,5 @@
 
-let started = false;
+let initiated = false;
 
 //=======Some generators============
 
@@ -52,13 +52,13 @@ const fillShop = () => {
     }    
 };
 
-//===============NPC and characters==============
+//===============NPC and characters and Dungeons==============
 
 var NPC = {name : "", age : 0, itemsToGive : []};
 
 const giveItem  = (character) => {return(character.itemsToGive)};
 
-function createCharacter (name, lvl, hp, str, vit, magic, int, luck, closeToLvlUp, lefthand, righthand) {
+function Character (name, lvl, hp, str, vit, magic, int, luck, closeToLvlUp, lefthand, righthand) {
     this.name = name,
     this.lvl = lvl,
     this.hp = hp,
@@ -72,5 +72,46 @@ function createCharacter (name, lvl, hp, str, vit, magic, int, luck, closeToLvlU
     this.righthand = righthand        
 }
 
+let fist = new item ("fist", 1, 0, 1, 0, false);
+
+function createCharacter () {
+    let char = new Character (generateName(), 1, Math.ceil(Math.random()*15), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9),
+    Math.ceil(Math.random()*5), false, fist, fist);
+    return(char);
+}
+
+let dung = new Array(3);
+
+function createEnemy (max) {
+    if(max===1){
+
+    } else if (max > 1) {
+        let mob = new Array(max);
+        for(let i = 0; i < max; i++){
+
+        }
+        return(mob);
+    }
+}
+
+function createDungeon (difficulty) {
+
+}
+
+
 //============Initiating Game===========
 //check for previous starting point or save first
+function InitiateAll () {
+    
+
+
+
+
+    
+
+}
+
+if(initiated===false){
+    const MC = createCharacter();
+    InitiateAll();
+};
