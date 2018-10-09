@@ -1,15 +1,7 @@
-var character = {name : "", age : 0, itemsToGive : []};
 
-const giveItem  = (character) => {return(character.itemsToGive)};
+let started = false;
 
-function item  (name, str, magic, minlvl, price, available) {
-    this.name = name,
-    this.str = str,
-    this.magic = magic,
-    this.minlvl = minlvl,
-    this.price = price,
-    this.available = available
-}
+//=======Some generators============
 
 const generateName = () => {
     let name = "";
@@ -21,17 +13,27 @@ const generateName = () => {
 };
 
  const basicStatGen = () => {
-
     let number = Math.ceil(Math.random()*9);
     return(number);
 };
+
+// =========shop and items===================
+
+var shop = new Array (5);
+
+function item  (name, str, magic, minlvl, price, available) {
+    this.name = name,
+    this.str = str,
+    this.magic = magic,
+    this.minlvl = minlvl,
+    this.price = price,
+    this.available = available
+}
 
 const createItem = () => {
     let iteeem = new item (generateName(), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*99), true);
     return(iteeem);
 };
-
-var shop = new Array (5);
 
 const initiateShop = () => {
     if (shop.length<2){
@@ -47,13 +49,16 @@ const fillShop = () => {
         if(shop[i]===undefined){
             shop[i] = createItem();
         }
-    }
-    
-
-    
+    }    
 };
 
-function player (name, lvl, hp, str, vit, magic, int, luck, closeToLvlUp, lefthand, righthand) {
+//===============NPC and characters==============
+
+var NPC = {name : "", age : 0, itemsToGive : []};
+
+const giveItem  = (character) => {return(character.itemsToGive)};
+
+function createCharacter (name, lvl, hp, str, vit, magic, int, luck, closeToLvlUp, lefthand, righthand) {
     this.name = name,
     this.lvl = lvl,
     this.hp = hp,
@@ -66,3 +71,6 @@ function player (name, lvl, hp, str, vit, magic, int, luck, closeToLvlUp, leftha
     this.lefthand = lefthand,
     this.righthand = righthand        
 }
+
+//============Initiating Game===========
+//check for previous starting point or save first

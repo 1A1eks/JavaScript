@@ -1,4 +1,67 @@
-body {
-    background-color: black;
+header {
+    background-color:#18181a;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 32px;
+}
+
+.topbarred {
+    display: inline-block;
+    padding: 6px 6px 6px 6px;
     color: white;
+    text-decoration: none;
+}
+
+body {
+    background-color: #2a2929;
+    color: white;
+    margin: 0%;
+}
+
+main {
+    margin-top: 32px;
+    display: grid;
+    grid-template-rows: 48px 1fr 1fr;
+    grid-template-columns: 35% 35% 30%;
+}
+
+.topnav {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    background-color: rgb(53, 52, 52);
+
+}
+
+.navving {
+    color: white;
+    text-decoration: none;
+}
+
+#shop {
+    grid-row-start: 2;
+    grid-row-end: 4;
+    grid-column-start: 3;
+    background-color: rgb(92, 88, 88);
+    padding-left: 6px;
+}
+
+#shopname {
+
+    padding-right: 5px;
+}
+
+#char2{
+    text-align: right;
+    padding-right: 10px;
+}
+
+#char1 {
+    padding-left: 10px;
+}
+
+#testing {
+    grid-row-start:3;
+    grid-column-start: 2;
 }
