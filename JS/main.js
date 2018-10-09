@@ -54,6 +54,9 @@ const fillShop = () => {
 
 //===============NPC and characters and Dungeons==============
 
+var allyArray = new Array();
+var enemyArray = new Array();
+
 var NPC = {name : "", age : 0, itemsToGive : []};
 
 const giveItem  = (character) => {return(character.itemsToGive)};
@@ -80,6 +83,9 @@ function createCharacter () {
     return(char);
 }
 
+
+//===============For when making large scale dungeons && stuf later on===============================
+/*
 let dung = new Array(3);
 
 function createEnemy (max) {
@@ -97,21 +103,61 @@ function createEnemy (max) {
 function createDungeon (difficulty) {
 
 }
-
+*/
 
 //============Initiating Game===========
 //check for previous starting point or save first
 function InitiateAll () {
-    
+    enemyArray.push(createCharacter());
 
 
 
 
-    
 
 }
 
 if(initiated===false){
     const MC = createCharacter();
+    allyArray.push(MC);
     InitiateAll();
 };
+
+//==================Gameplay==========================
+
+function refreshVisuals() {
+    document.getElementsByClassName('lvl')[0].innerHTML = allyArray[0].lvl;
+    document.getElementsByClassName('name')[0].innerHTML = allyArray[0].name;
+    document.getElementsByClassName('hp')[0].innerHTML = allyArray[0].hp;
+    document.getElementsByClassName('str')[0].innerHTML = allyArray[0].str;
+    document.getElementsByClassName('vit')[0].innerHTML = allyArray[0].vit;
+    document.getElementsByClassName('int')[0].innerHTML = allyArray[0].int;
+    document.getElementsByClassName('luck')[0].innerHTML = allyArray[0].luck;
+    document.getElementsByClassName('nameWeapon')[0].innerHTML = allyArray[0].lefthand.name;
+    document.getElementsByClassName('strWeapon')[0].innerHTML = allyArray[0].lefthand.str;
+    document.getElementsByClassName('magicWeapon')[0].innerHTML = allyArray[0].lefthand.magic;
+    document.getElementsByClassName('minLvlWeapon')[0].innerHTML = allyArray[0].lefthand.minlvl;
+    document.getElementsByClassName('priceWeapon')[0].innerHTML = allyArray[0].lefthand.price;
+    //document.getElementsByClassName('')[0].innerHTML = allyArray[0].;
+    //document.getElementsByClassName('')[0].innerHTML = allyArray[0].;
+    //document.getElementsByClassName('')[0].innerHTML = allyArray[0].;
+
+    document.getElementsByClassName('lvl')[1].innerHTML = enemyArray[0].lvl;
+    document.getElementsByClassName('name')[1].innerHTML = enemyArray[0].name;
+    document.getElementsByClassName('hp')[1].innerHTML = enemyArray[0].hp;
+    document.getElementsByClassName('str')[1].innerHTML = enemyArray[0].str;
+    document.getElementsByClassName('vit')[1].innerHTML = enemyArray[0].vit;
+    document.getElementsByClassName('int')[1].innerHTML = enemyArray[0].int;
+    document.getElementsByClassName('luck')[1].innerHTML = enemyArray[0].luck;
+    document.getElementsByClassName('nameWeapon')[1].innerHTML = enemyArray[0].lefthand.name;
+    document.getElementsByClassName('strWeapon')[1].innerHTML = enemyArray[0].lefthand.str;
+    document.getElementsByClassName('magicWeapon')[1].innerHTML = enemyArray[0].lefthand.magic;
+    document.getElementsByClassName('minLvlWeapon')[1].innerHTML = enemyArray[0].lefthand.minlvl;
+    document.getElementsByClassName('priceWeapon')[1].innerHTML = enemyArray[0].lefthand.price;
+    //document.getElementsByClassName('')[1].innerHTML = enemyArray[0].;
+    //document.getElementsByClassName('')[1].innerHTML = enemyArray[0].;
+}
+
+//===========Actually calling functions to play=============================
+
+InitiateAll();
+refreshVisuals();
