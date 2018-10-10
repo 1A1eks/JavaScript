@@ -114,3 +114,15 @@ main {
     border-style: solid;
     border-radius: 6px;
 }
+
+.battleText2 { 
+    display: none;
+    z-index: 1;
+    background-color: rgb(83, 77, 77);
+    text-align: left;
+    min-height: 10em;
+    border: 2em;
+    border-color: black;
+    border-style: solid;
+    border-radius: 6px;
+}
