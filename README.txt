@@ -1,5 +1,7 @@
 basic game with basic magic/handtohand combat
  		and an item shop.
+   
+url: https://1a1eks.github.io/JavaScript/
 
 
 descriptive list: https://www.w3schools.com/html/tryit.asp?filename=tryhtml_lists_description
