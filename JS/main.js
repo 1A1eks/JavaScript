@@ -76,12 +76,25 @@ function Character (name, lvl, hp, str, vit, magic, int, wis, luck, closeToLvlUp
     this.righthand = righthand        
 }
 
-let fist = new item ("fist", 1, 0, 1, 0, false);
+function makeFist () {
+    let fist = new item ("fist", 1, 0, 1, 0, false);
+    return fist;
+}
+//let fist = new item ("fist", 1, 0, 1, 0, false);
 
 function createCharacter () {
-    let char = new Character (generateName(), 1, Math.ceil(Math.random()*15), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9),
-    Math.ceil(Math.random()*5), false, fist, fist);
+    let char = new Character (generateName(), 1, makeHitPoints(), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9),
+    Math.ceil(Math.random()*5), false, makeFist(), makeFist());
     return(char);
+}
+
+function makeHitPoints () {
+    let hp = Math.ceil(Math.random()*15);
+    if (hp > 9){
+        return hp;
+    } else {
+        return 10;
+    }
 }
 
 
@@ -167,28 +180,40 @@ function attack (characterAA, characterBB) {
     let critical = isCriticalHit(characterAA);
     let dmgBB = attackVal(characterAA) * critical;
 
-    let message = "";
+    let message1 = "";
     switch (critical){
         case (0):
-        message = "miss";
+        message1 = "miss";
         break;
         case (1):
-        message = "You hit..";
+        message1 = "You hit..";
         break;
         case(2):
-        message = "~Critical Hit!~"
+        message1 = "~Critical Hit!~"
         break;
     }
-
+    console.log(message1 + "  " + dmgBB);
     //counterattack?
     let dmgAA = 0;
 
-    return(message1, dmgBB, dmgAA);
+    let message2 = "";
+
+    return([message1, dmgAA, dmgBB, message2]);
 }
 
 function attackVal (character) {
-    let attackValue = this.lvl + Math.floor(Math.random()*this.lefthand.str) * Math.floor(Math.random()*this.str);
+    let maxValue = character.lvl + character.lefthand.str * character.str;
+    console.log(1 + " maxvalue: " + maxValue);
+    maxValue = Math.pow(maxValue, (character.str + character.lefthand.str) / (character.lvl * 10 + character.lefthand.minlvl * 10))
+    console.log(maxValue);
+    let minValue = character.lvl + Math.floor(character.str/3);
+    console.log("minvalue: " + minValue);
 
+    let attackValue = Math.ceil(Math.random() * ( maxValue - minValue ) ) + minValue;
+
+    //let attackValue = character.lvl + Math.ceil(Math.random()*character.lefthand.str) * Math.floor(Math.random()*character.str);
+    //attackValue = Math.pow(attackValue, (character.str + character.lefthand.str) / (character.lvl * 10 + character.lefthand.minlvl * 10))
+    return attackValue;
 }
 
 function defendVal () {
@@ -216,8 +241,27 @@ function running () {
 function counterAttack () {
 
 }
+//==============-Visual output from combat-=====================
+
+function executeAttack () {
+   let returned =  attack(allyArray[0], enemyArray[0]);
+   allyArray[0].hp-=returned[1];
+   enemyArray[0].hp-=returned[2];
+   refreshVisuals();
+}
+// returns message, dmgA, dmgB, message if charB counterattacks
+//    attack(allyArray[0], enemyArray[0]);
 
 //===========-Actually calling functions to play-=============================
 
 InitiateAll();
 refreshVisuals();
+
+console.log(document.getElementById("attack"));
+
+document.getElementById("attack").addEventListener("click", (event)=>executeAttack());
+
+/*
+document.getElementById("defend").addEventListener("click", );
+document.getElementById("escape").addEventListener("click", );
+*/
