@@ -206,7 +206,7 @@ function attackVal (character) {
     console.log(1 + " maxvalue: " + maxValue);
     maxValue = Math.pow(maxValue, (character.str + character.lefthand.str) / (character.lvl * 10 + character.lefthand.minlvl * 10))
     console.log(maxValue);
-    let minValue = character.lvl + Math.floor(character.str/3);
+    let minValue = character.lvl - 1 + Math.floor(character.str/(character.lvl + 3));
     console.log("minvalue: " + minValue);
 
     let attackValue = Math.ceil(Math.random() * ( maxValue - minValue ) ) + minValue;
@@ -247,10 +247,44 @@ function executeAttack () {
    let returned =  attack(allyArray[0], enemyArray[0]);
    allyArray[0].hp-=returned[1];
    enemyArray[0].hp-=returned[2];
+
+   document.getElementsByClassName('battleText')[0]
+   document.createElement('p');
+    
+   switch (returned[0]) {
+        case "miss":
+        document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
+        = "You missed.."
+        break;
+        case "You hit..":
+        document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
+        = "You hit the enemy " + enemyArray[0].name + " for " + returned[2] + " damage!"
+        break;
+        case "~Critical Hit!~":
+        document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
+        = "~Critical Hit!~ \n  You Critical hit for " + returned[2] + " damage!"
+        break;
+   }
    refreshVisuals();
 }
 // returns message, dmgA, dmgB, message if charB counterattacks
 //    attack(allyArray[0], enemyArray[0]);
+
+  /* up to 5 turns or so shown, from there on, don't create more p's, but change text.
+    Idea for later
+
+  var target = document.getElementsByClassName('battleText')[0];
+
+  if ( document.getElementsByClassName("battleText")[0].childElementCount > 10) {
+
+  } else {
+      document.getElementsByClassName('battleText')[0]
+      document.createElement('p');
+       
+      document.getElementsByClassName('battleText')[0].parentNode.insertBefore( 'p', target.nextSibling );   
+
+  }
+  */
 
 //===========-Actually calling functions to play-=============================
 
