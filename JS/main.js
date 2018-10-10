@@ -248,8 +248,50 @@ function executeAttack () {
    allyArray[0].hp-=returned[1];
    enemyArray[0].hp-=returned[2];
 
-   document.getElementsByClassName('battleText')[0]
-   document.createElement('p');
+   if(document.getElementsByClassName('battleText')[0].childElementCount > 8) {
+    if (enemyArray[0].hp <= 0) {
+        enemyArray[0].hp = 0;
+     document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
+     = "You killed the enemy."
+     refreshVisuals();
+     return;
+    }     
+    switch (returned[0]) {
+         case "miss":
+         document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
+         = "You missed.."
+         break;
+         case "You hit..":
+         document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
+         = "You hit the enemy " + enemyArray[0].name + " for " + returned[2] + " damage!"
+         break;
+         case "~Critical Hit!~":
+         document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
+         = "~Critical Hit!~ \n  You Critical hit for " + returned[2] + " damage!"
+         break;
+    }
+   refreshVisuals();
+   return;
+   }
+
+   var p = `<p id="p${document.getElementsByClassName('battleText')[0].childElementCount}">paragraph</p>`;
+   console.log(p);
+
+   //document.getElementsByClassName('battleText')[0]
+   //document.createElement('p');
+   var count = document.getElementsByClassName('battleText')[0].childElementCount -1;
+   console.log(document.getElementsByClassName('battleText')[0].childElementCount + "   " + `p${count}`);
+   
+   document.getElementById(`p${count}`).insertAdjacentHTML('afterend', p);
+
+   //===killing the enemy
+   if (enemyArray[0].hp <= 0) {
+       enemyArray[0].hp = 0;
+    document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
+    = "You killed the enemy."
+    refreshVisuals();
+    return;
+   }
     
    switch (returned[0]) {
         case "miss":
