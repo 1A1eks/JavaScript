@@ -10,6 +10,8 @@ object-characters: stored in array, pushed and popped as needed.
 
 Editing and adding Elements with DOM:
 
+-https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
+
 -https://www.digitalocean.com/community/tutorials/how-to-make-changes-to-the-dom
 
 -https://gomakethings.com/adding-a-new-element-to-the-dom-with-vanilla-js/
