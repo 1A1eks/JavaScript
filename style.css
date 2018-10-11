@@ -1,4 +1,7 @@
 header {
+    grid-row-start: 1;
+    grid-column-start: 1;
+    grid-column-end: 4;
     background-color:#18181a;
     position: absolute;
     left: 0px;
@@ -24,16 +27,15 @@ body {
 main {
     margin-top: 32px;
     display: grid;
-    grid-template-rows: 48px 18% 40%;
+    grid-template-rows: 32px 48px 18% 40%;
     grid-template-columns: 35% 35% 30%;
 }
 
 .topnav {
-    grid-column-start: 1;
+    grid-column-start: 2;
     grid-column-end: 4;
     background-color: rgb(53, 52, 52);
     overflow: hidden;
-
 }
 
 .navving {
@@ -42,8 +44,8 @@ main {
 }
 
 #shop {
-    grid-row-start: 2;
-    grid-row-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 5;
     grid-column-start: 3;
     background-color: rgb(92, 88, 88);
     padding-left: 6px;
@@ -82,7 +84,7 @@ main {
 }
 
 #testing {
-    grid-row-start:3;
+    grid-row-start:4;
     grid-column-start: 2;
 }
 
@@ -133,4 +135,3 @@ main {
     border-radius: 6px;
 }
 
-.
