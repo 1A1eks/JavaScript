@@ -89,13 +89,16 @@ main {
 .battleControl {
     grid-column-start: 1;
     grid-column-end: 3;
+    position: relative;
 }
 
 .battleCommands {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-content: space-around;
     flex-direction: row;
+    position: relative;
 }
 
 .battleCommands > div > h2 {
@@ -110,13 +113,16 @@ main {
     text-align: left;
     min-height: 10em;
     border: 2em;
+    
+    min-width: 93.25%;
     border-color: black;
     border-style: solid;
     border-radius: 6px;
+    position: absolute;
 }
 
 .battleText2 { 
-    display: none;
+    opacity: 0;
     z-index: 1;
     background-color: rgb(83, 77, 77);
     text-align: left;
@@ -126,3 +132,5 @@ main {
     border-style: solid;
     border-radius: 6px;
 }
+
+.
