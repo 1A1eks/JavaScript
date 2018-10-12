@@ -20,6 +20,12 @@ Editing and adding Elements with DOM:
 
 
 
+Icons, fonts and other stuff I used:
+
+https://www.iconfinder.com/icons/134216/hamburger_lines_menu_icon
+
+https://www.iconfinder.com/icons/134226/arrow_back_left_icon
+
 Not programming, but functional values related:
 
 -https://en.wikipedia.org/wiki/Dynamic_game_difficulty_balancing#Dynamic_game_elements
