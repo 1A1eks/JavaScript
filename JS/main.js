@@ -140,7 +140,6 @@ if(initiated===false){
     initiated=true;
 };
 
-
 function showExternalClick() {
     let externalLinks = document.getElementById("Links");
     if (externalLinks.style.display === "block") {

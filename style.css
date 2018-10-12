@@ -24,12 +24,19 @@
         display: inline;
     }
 
+    #topbarBackground {
+        background-color: #18181a;
+        padding: 0;
+        margin: 0;
+    }
+
     .battleControl {
         grid-column-start: 1;
         grid-column-end: 3;
         grid-row-start: 4;
         position: relative;
     }
+
 
     header {
         grid-row-start: 1;
@@ -43,7 +50,15 @@
         overflow: visible;
     }
 
-    
+    li {
+        float: left;
+        list-style-type: none;
+    }
+    li > a {
+        display: block;
+        padding-left: 8px;
+
+    }
 }
 
 .topbarred {
@@ -62,7 +77,6 @@ body {
 
 
 main {
-    margin-top: 32px;
     display: grid;
     grid-template-rows: 32px 48px 30% 40%;
     grid-template-columns: 35% 35% 30%;
