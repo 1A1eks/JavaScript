@@ -20,6 +20,14 @@ Editing and adding Elements with DOM:
 
 
 
+Mobile menu / navbar:
+
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_mobile_navbar#home
+
+https://www.w3schools.com/css/css_navbar.asp
+
+
+
 Icons, fonts and other stuff I used:
 
 https://www.iconfinder.com/icons/134216/hamburger_lines_menu_icon
