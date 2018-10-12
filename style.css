@@ -17,12 +17,14 @@
              url('Fonts/dungeon_sn/DUNGRG__.TTF') format('truetype'); /* Legacy iOS */
     }
 
-    
-
     body {
-        font-family: 'DUNGRG__', sans-serif;
+        background-color: #2a2929;
+        color: white;
+        margin: 0%;
+        font-family: 'DUNGRG__';
+        font-weight: bold;
         font-size: 200%;
-    }
+    }    
 
     header {
         grid-row-start: 1;
@@ -90,7 +92,31 @@
     li > a {
         display: block;
         padding-left: 8px;
+    }
 
+    .character > dl {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    #char1 {
+        grid-row-start: 3;
+        grid-column-start: 1;
+    }
+    
+    #char2{
+        grid-row-start: 3;
+        grid-column-start: 2;
+        text-align: left;
+        padding-right: 10px;
+    }
+
+    #wrapper > dt {
+      width: 155px;
+    }
+
+    #wrapper > dd {
+     width: 115px;
     }
     
     .battleText { 
@@ -98,8 +124,8 @@
         text-align: left;
         min-height: 10em;
         max-height: 12em;
-        border: 2em;    
-        border-color: black;
+        border: 1.5em;    
+        border-color: rgb(0, 0, 0);
         border-style: solid;
         border-radius: 6px;
         overflow: scroll;
@@ -119,17 +145,6 @@
         border-radius: 6px;
     }
 }
-
-
-
-body {
-    background-color: #2a2929;
-    color: white;
-    margin: 0%;
-    font-family: 'DUNGRG__';
-    font-weight: bold;
-}
-
 
 main {
     display: grid;
@@ -161,32 +176,12 @@ main {
     padding-right: 5px;
 }
 
-#char1 {
-    grid-row-start: 3;
-    grid-column-start: 1;
-}
-
-#char2{
-    grid-row-start: 3;
-    grid-column-start: 2;
-    text-align: left;
-    padding-right: 10px;
-}
-
 #wrapper {
     display: flex;
     flex-wrap: flex;
     justify-content: flex-end;
     align-items: end;
     flex-direction: column;
-}
-
-#wrapper > dt {
-    width: 155px;
-}
-
-#wrapper > dd {
-    width: 115px;
 }
 
 #char1 {
