@@ -122,7 +122,7 @@ function createDungeon (difficulty) {
 /*============Initiating Game===========
 check for previous starting point or save first & other stuff
 
-Only to make sure page is displayed properly, 
+Only to make sure page is displayed properly, + menu functions for mobile.
 not actually doing other stuff
 */
 function InitiateAll () {
@@ -139,6 +139,25 @@ if(initiated===false){
     InitiateAll();
     initiated=true;
 };
+
+
+function showExternalClick() {
+    let externalLinks = document.getElementById("Links");
+    if (externalLinks.style.display === "block") {
+        externalLinks.style.display = "none";
+    } else {
+        externalLinks.style.display = "block";
+    }
+  }
+
+  function showTopNav() {
+    let topNav = document.getElementById("Navs");
+    if (topNav.style.display === "block") {
+        topNav.style.display = "none";
+    } else {
+        topNav.style.display = "block";
+    }
+  }
 
 //==================-Gameplay--visuals/html&CSS-==========================
 

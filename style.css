@@ -1,14 +1,49 @@
-header {
-    grid-row-start: 1;
-    grid-column-start: 1;
-    grid-column-end: 4;
-    background-color:#18181a;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 100%;
-    height: 32px;
-    overflow: hidden;
+@media screen and (min-width:780px) {
+
+    #Links {
+        display: inline-block;
+    }
+
+    #Navs {
+        display: inline-block;
+    }
+
+    #topbarButton {
+        display: none;
+    }
+
+    #navButton {
+        display: none;
+    }
+
+    .topbarred {
+        display: inline;
+    }
+
+    .navving {
+        display: inline;
+    }
+
+    .battleControl {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 4;
+        position: relative;
+    }
+
+    header {
+        grid-row-start: 1;
+        grid-column-start: 1;
+        grid-column-end: 4;
+        background-color:#18181a;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 32px;
+        overflow: visible;
+    }
+
+    
 }
 
 .topbarred {
@@ -22,12 +57,14 @@ body {
     background-color: #2a2929;
     color: white;
     margin: 0%;
+    font-family: 'Old Wise Lord';
 }
+
 
 main {
     margin-top: 32px;
     display: grid;
-    grid-template-rows: 32px 48px 18% 40%;
+    grid-template-rows: 32px 48px 30% 40%;
     grid-template-columns: 35% 35% 30%;
 }
 
@@ -52,13 +89,17 @@ main {
 }
 
 #shopname {
-
     padding-right: 5px;
 }
 
-
+#char1 {
+    grid-row-start: 3;
+    grid-column-start: 1;
+}
 
 #char2{
+    grid-row-start: 3;
+    grid-column-start: 2;
     text-align: left;
     padding-right: 10px;
 }
@@ -83,16 +124,7 @@ main {
     padding-left: 10px;
 }
 
-#testing {
-    grid-row-start:4;
-    grid-column-start: 2;
-}
 
-.battleControl {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    position: relative;
-}
 
 .battleCommands {
     display: flex;
@@ -114,8 +146,7 @@ main {
     background-color: rgb(83, 77, 77);
     text-align: left;
     min-height: 10em;
-    border: 2em;
-    
+    border: 2em;    
     min-width: 93.25%;
     border-color: black;
     border-style: solid;

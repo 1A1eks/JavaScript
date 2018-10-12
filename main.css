@@ -6,6 +6,16 @@
         grid-template-rows: 120px 40% 40%;
         grid-template-columns: 50% 50%;
     }
+
+    /*
+main {
+    margin-top: 32px;
+    display: grid;
+    grid-template-rows: 32px 48px 18% 40%;
+    grid-template-columns: 35% 35% 30%;
+}
+
+    */
     
     header {
         background-color:#18181a;
@@ -13,7 +23,27 @@
         top: 0px;
         width: 100%;
         height: 120px;
-        overflow: hidden;        
+        overflow: hidden;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: space-between;
+        justify-content: center;
+        overflow: visible;
+        z-index: 1;
+        position: absolute;
+                
+    }
+
+    #Links {
+        display: none;
+    }
+
+    #Navs {
+        display: none;
+    }
+
+    #topbarBackground {
+        background-color: #18181a;
     }
 
     .topnav {
@@ -25,6 +55,42 @@
         z-index: 1;
     }
 
+    .navving {
+        color: white;
+        text-decoration: none;
+    }
+    
+    #shop {
+        grid-row-start: 3;
+        grid-row-end: 5;
+        grid-column-start: 3;
+        background-color: rgb(92, 88, 88);
+        padding-left: 6px;
+    }
+    
+    #shopname {
+        padding-right: 5px;
+    }
+
+    #char1 {
+        grid-row-start: 2;
+        padding-left: 10px;
+    }
+
+    #char2 {
+        grid-row-start: 2;
+        text-align: left;
+        padding-right: 10px;
+    }
+    
+    #wrapper {
+        display: flex;
+        flex-wrap: flex;
+        justify-content: flex-end;
+        align-items: end;
+        flex-direction: column;
+    }
+
     #wrapper > dt {
         width: 120px;
     }
@@ -33,17 +99,51 @@
         width: 80px;
     }
 
+    .battleControl {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        position: relative;
+    }
+    .battleCommands {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: space-around;
+        flex-direction: row;
+        position: relative;
+    }
+    
+    .battleCommands > div > h2 {
+        display: inline-block;
+        padding: 1em;
+        max-height: 2em;
+        margin: 0;
+    }
+    
+    .battleText { 
+        background-color: rgb(83, 77, 77);
+        text-align: left;
+        min-height: 10em;
+        border: 2em;    
+        min-width: 93.25%;
+        border-color: black;
+        border-style: solid;
+        border-radius: 6px;
+        position: absolute;
+    }
+    
+    .battleText2 { 
+        opacity: 0;
+        z-index: 1;
+        background-color: rgb(83, 77, 77);
+        text-align: left;
+        min-height: 10em;
+        border: 2em;
+        border-color: black;
+        border-style: solid;
+        border-radius: 6px;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
+    
 }
