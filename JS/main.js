@@ -161,7 +161,7 @@ function showExternalClick() {
 //==================-Gameplay--visuals/html&CSS-==========================
 
 function refreshVisuals() {
-    document.getElementsByClassName('lvl')[0].innerHTML = "Lvl" + allyArray[0].lvl + "  ";
+    document.getElementsByClassName('lvl')[0].innerHTML = "Lvl " + allyArray[0].lvl + "  ";
     document.getElementsByClassName('name')[0].innerHTML = " " + allyArray[0].name;
     document.getElementsByClassName('hp')[0].innerHTML = allyArray[0].hp;
     document.getElementsByClassName('str')[0].innerHTML = allyArray[0].str;
@@ -178,7 +178,7 @@ function refreshVisuals() {
     //document.getElementsByClassName('')[0].innerHTML = allyArray[0].;
     //document.getElementsByClassName('')[0].innerHTML = allyArray[0].;
 
-    document.getElementsByClassName('lvl')[1].innerHTML = "Lvl" + enemyArray[0].lvl + "  ";
+    document.getElementsByClassName('lvl')[1].innerHTML = "Lvl " + enemyArray[0].lvl + "  ";
     document.getElementsByClassName('name')[1].innerHTML = " " + enemyArray[0].name;
     document.getElementsByClassName('hp')[1].innerHTML = enemyArray[0].hp;
     document.getElementsByClassName('str')[1].innerHTML = enemyArray[0].str;
@@ -268,86 +268,87 @@ function executeAttack () {
    let returned =  attack(allyArray[0], enemyArray[0]);
    allyArray[0].hp-=returned[1];
    enemyArray[0].hp-=returned[2];
-
+    let messagep = "";
    if(document.getElementsByClassName('battleText')[0].childElementCount > 8) {
     if (enemyArray[0].hp <= 0) {
         enemyArray[0].hp = 0;
-     document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
-     = "You killed the enemy."
-     refreshVisuals();
-     return;
+        messagep     = "You killed the enemy."
+    adjustBattleText(messagep);
+    refreshVisuals();
+    return;
     }     
     switch (returned[0]) {
          case "miss":
-         document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
-         = "You missed.."
+         messagep         = "You missed.."
          break;
          case "You hit..":
-         document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
-         = "You hit the enemy " + enemyArray[0].name + " for " + returned[2] + " damage!"
+         messagep         = "You hit the enemy " + enemyArray[0].name + " for " + returned[2] + " damage!"
          break;
          case "~Critical Hit!~":
-         document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
-         = "~Critical Hit!~ \n  You Critical hit for " + returned[2] + " damage!"
+         messagep         = "~Critical Hit!~ \n  You Critical hit for " + returned[2] + " damage!"
          break;
     }
-   refreshVisuals();
-   return;
+    adjustBattleText(messagep);
+    refreshVisuals();
+    return;
    }
-
-   var p = `<p id="p${document.getElementsByClassName('battleText')[0].childElementCount}">paragraph</p>`;
-   console.log(p);
-
-   //document.getElementsByClassName('battleText')[0]
-   //document.createElement('p');
-   var count = document.getElementsByClassName('battleText')[0].childElementCount -1;
-   console.log(document.getElementsByClassName('battleText')[0].childElementCount + "   " + `p${count}`);
-   
-   document.getElementById(`p${count}`).insertAdjacentHTML('afterend', p);
 
    //===killing the enemy
    if (enemyArray[0].hp <= 0) {
        enemyArray[0].hp = 0;
-    document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
-    = "You killed the enemy."
+       messagep    = "You killed the enemy."
+    adjustBattleText(messagep);
     refreshVisuals();
     return;
    }
     
    switch (returned[0]) {
         case "miss":
-        document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
-        = "You missed.."
+        messagep        = "You missed.."
         break;
         case "You hit..":
-        document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
-        = "You hit the enemy " + enemyArray[0].name + " for " + returned[2] + " damage!"
+        messagep        = "You hit the enemy " + enemyArray[0].name + " for " + returned[2] + " damage!"
         break;
         case "~Critical Hit!~":
-        document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
-        = "~Critical Hit!~ \n  You Critical hit for " + returned[2] + " damage!"
+        messagep        = "~Critical Hit!~ \n  You Critical hit for " + returned[2] + " damage!"
         break;
    }
+   adjustBattleText(messagep);
    refreshVisuals();
 }
+// seperate function to adjust the battletext innerhtml so problems might be avoided...
+
+function adjustBattleText(message1) {
+
+    if (document.getElementsByClassName('battleText')[0].childElementCount < 10){
+   var count = document.getElementsByClassName('battleText')[0].childElementCount -1;
+   console.log(document.getElementsByClassName('battleText')[0].childElementCount + "   " + `p${count}`);
+     
+   
+   let p = `<p id="p${document.getElementsByClassName('battleText')[0].childElementCount}">paragraph</p>`;
+   console.log(p);
+
+   document.getElementById(`p${count}`).insertAdjacentHTML('afterend', p);
+
+   document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
+   = message1;
+   return;
+    }
+
+   var count = document.getElementsByClassName('battleText')[0].childElementCount -1;
+   console.log(document.getElementsByClassName('battleText')[0].childElementCount + "   " + `p${count}`);
+
+    let temporary = "";
+    for (let i = count; i >  0; i--) {
+        temporary = document.getElementsByTagName('p')[i].innerHTML;
+        document.getElementsByTagName('p')[i].innerHTML = message1;
+        message1 = temporary;
+    }
+    return;
+}
+
 // returns message, dmgA, dmgB, message if charB counterattacks
 //    attack(allyArray[0], enemyArray[0]);
-
-  /* up to 5 turns or so shown, from there on, don't create more p's, but change text.
-    Idea for later
-
-  var target = document.getElementsByClassName('battleText')[0];
-
-  if ( document.getElementsByClassName("battleText")[0].childElementCount > 10) {
-
-  } else {
-      document.getElementsByClassName('battleText')[0]
-      document.createElement('p');
-       
-      document.getElementsByClassName('battleText')[0].parentNode.insertBefore( 'p', target.nextSibling );   
-
-  }
-  */
 
 //===========-Actually calling functions to play-=============================
 
