@@ -119,23 +119,44 @@ function createDungeon (difficulty) {
 }
 */
 
-//============Initiating Game===========
-//check for previous starting point or save first
+/*============Initiating Game===========
+check for previous starting point or save first & other stuff
+
+Only to make sure page is displayed properly, + menu functions for mobile.
+not actually doing other stuff
+*/
 function InitiateAll () {
-    enemyArray.push(createCharacter());
-    initiateShop();
-
-
-
-
-
+    if(enemyArray.length < 1){
+        enemyArray.push(createCharacter());
+    }
+    initiateShop();    
+    initiated=true;
 }
 
 if(initiated===false){
     const MC = createCharacter();
     allyArray.push(MC);
     InitiateAll();
+    initiated=true;
 };
+
+function showExternalClick() {
+    let externalLinks = document.getElementById("Links");
+    if (externalLinks.style.display === "block") {
+        externalLinks.style.display = "none";
+    } else {
+        externalLinks.style.display = "block";
+    }
+  }
+
+  function showTopNav() {
+    let topNav = document.getElementById("Navs");
+    if (topNav.style.display === "block") {
+        topNav.style.display = "none";
+    } else {
+        topNav.style.display = "block";
+    }
+  }
 
 //==================-Gameplay--visuals/html&CSS-==========================
 
