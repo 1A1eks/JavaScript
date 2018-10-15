@@ -26,6 +26,8 @@ main {
     */
     
     header {
+        grid-column-start: 1;
+        grid-column-end: 3;
         background-color:#18181a;
         left: 0px;
         top: 0px;
@@ -35,10 +37,10 @@ main {
         display: flex;
         flex-wrap: wrap;
         align-content: space-between;
+        flex-direction: row;
         justify-content: center;
         overflow: visible;
         z-index: 1;
-        position: absolute;
                 
     }
 
@@ -52,21 +54,33 @@ main {
 
     #topbarBackground {
         background-color: #18181a;
+        padding: 1em;
+        margin-right: 10%;
+        margin-bottom: 0%;
     }
+
     .topbarred {
         display: inline-block;
         padding: 6px 6px 6px 6px;
         color: white;
         text-decoration: none;
+
+    }
+
+    #topnavList {
+        padding: 1em;
+        margin-left: 10%;
+        margin-bottom: 0;
+        background-color: rgb(53, 52, 52);
+        overflow: visible;
     }
 
     .topnav {
         grid-row-start: 1;
         grid-column-start: 2;
         grid-column-end: 3;
-        background-color: rgb(53, 52, 52);
-        overflow: hidden;
         z-index: 1;
+        background-color: #18181a;
     }
 
     .navving {

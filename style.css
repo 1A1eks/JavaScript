@@ -214,9 +214,35 @@ main {
 }
 
 .battleCommands > div > h2:hover {
-    
+    background-color: #5f5d5d;
+    z-index: 1;
+    cursor: grab;
 }
 
+.commando > h2{
+    margin: 0em;
+}
+
+.commando:hover {
+    background-color: #5f5d5d;
+    z-index: 1;
+    cursor: move;
+}
+
+#up {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#up > a {
+    display: inline-block;
+    padding: .65em;
+    max-height: 1.6em;
+    margin: 0;
+    text-decoration: none;
+    color: white;
+}
 
 #p0 {
     display: none;

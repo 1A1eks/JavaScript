@@ -144,8 +144,12 @@ function showExternalClick() {
     let externalLinks = document.getElementById("Links");
     if (externalLinks.style.display === "block") {
         externalLinks.style.display = "none";
+        document.getElementById('topbarBackground').style.marginRight = "10%";
+        document.getElementById('topbarBackground').style.maxHeight = "50px";
     } else {
         externalLinks.style.display = "block";
+        document.getElementById('topbarBackground').style.marginRight = "0";
+        document.getElementById('topbarBackground').style.maxHeight = "300px";
     }
   }
 
@@ -153,8 +157,10 @@ function showExternalClick() {
     let topNav = document.getElementById("Navs");
     if (topNav.style.display === "block") {
         topNav.style.display = "none";
+        document.getElementById('topnavList').style.marginLeft = "10%";
     } else {
         topNav.style.display = "block";
+        document.getElementById('topnavList').style.marginLeft = "0";
     }
   }
 
