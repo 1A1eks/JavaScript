@@ -23,6 +23,7 @@
         margin: 0%;
         font-family: 'DUNGRG__';
         font-weight: bold;
+        line-height: .95em;
         font-size: 200%;
     }    
 
@@ -63,6 +64,12 @@
 
     .navving {
         display: inline;
+    }
+
+    #topnavList {
+        margin-top: 0;
+        margin-bottom: 0%;
+        padding: 0;
     }
 
     #topbarBackground {
@@ -201,11 +208,14 @@ main {
 
 .battleCommands > div > h2 {
     display: inline-block;
-    padding: 1em;
-    max-height: 2em;
+    padding: .65em;
+    max-height: 1.6em;
     margin: 0;
 }
 
+.battleCommands > div > h2:hover {
+    
+}
 
 
 #p0 {

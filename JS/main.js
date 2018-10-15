@@ -332,6 +332,7 @@ function adjustBattleText(message1) {
 
    document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
    = message1;
+   document.getElementById(`p${count}`).scrollIntoView();
    return;
     }
 
@@ -344,6 +345,7 @@ function adjustBattleText(message1) {
         document.getElementsByTagName('p')[i].innerHTML = message1;
         message1 = temporary;
     }
+    document.getElementById(`p${count}`).scrollIntoView();
     return;
 }
 
