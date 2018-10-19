@@ -140,6 +140,17 @@ if(initiated===false){
     initiated=true;
 };
 
+
+
+
+
+
+
+
+
+
+// update so doms go into variables!!
+
 function showExternalLinksClick() {
     let externalLinks = document.getElementById("Links");
     if (externalLinks.style.display === "block") {
@@ -226,6 +237,8 @@ function refreshVisuals() {
 
 //============-Gameplay-Combat-=================
 
+//=========-Goes-into-character-Class?-======================
+
 function attack (characterAA, characterBB) {
     let critical = isCriticalHit(characterAA);
     let dmgBB = attackVal(characterAA) * critical;
@@ -291,6 +304,10 @@ function running () {
 function counterAttack () {
 
 }
+
+
+
+
 //==============-Visual output from combat-=====================
 
 function executeAttack () {
@@ -377,6 +394,17 @@ function adjustBattleText(message1) {
     document.getElementById(`p${count}`).scrollIntoView();
     return;
 }
+
+////needs updating for performance!------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
 
 // returns message, dmgA, dmgB, message if charB counterattacks
 //    attack(allyArray[0], enemyArray[0]);
