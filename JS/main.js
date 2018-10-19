@@ -140,7 +140,7 @@ if(initiated===false){
     initiated=true;
 };
 
-function showExternalClick() {
+function showExternalLinksClick() {
     let externalLinks = document.getElementById("Links");
     if (externalLinks.style.display === "block") {
         externalLinks.style.display = "none";
@@ -165,40 +165,63 @@ function showExternalClick() {
   }
 
 //==================-Gameplay--visuals/html&CSS-==========================
+const lvlA = document.getElementsByClassName('lvl')[0];
+const nameA = document.getElementsByClassName('name')[0];
+const hpA = document.getElementsByClassName('hp')[0];
+const strA = document.getElementsByClassName('str')[0];
+const vitA = document.getElementsByClassName('vit')[0];
+const intA = document.getElementsByClassName('int')[0];
+const wisA = document.getElementsByClassName('wis')[0];
+const luckA = document.getElementsByClassName('luck')[0];
+const nameWeaponA = document.getElementsByClassName('nameWeapon')[0];
+const strWeaponA = document.getElementsByClassName('strWeapon')[0];
+const magicWeaponA = document.getElementsByClassName('magicWeapon')[0];
+const minLvlWeaponA = document.getElementsByClassName('minLvlWeapon')[0];
+const priceWeaponA = document.getElementsByClassName('priceWeapon')[0];
+
+const lvlB = document.getElementsByClassName('lvl')[1];
+const nameB =  document.getElementsByClassName('name')[1];
+const hpB = document.getElementsByClassName('hp')[1];
+const strB = document.getElementsByClassName('str')[1];
+const vitB = document.getElementsByClassName('vit')[1];
+const intB = document.getElementsByClassName('int')[1];
+const wisB = document.getElementsByClassName('wis')[1];
+const luckB = document.getElementsByClassName('luck')[1];
+const nameWeaponB = document.getElementsByClassName('nameWeapon')[1];
+const strWeaponB = document.getElementsByClassName('strWeapon')[1];
+const magicWeaponB = document.getElementsByClassName('magicWeapon')[1];
+const minLvlWeaponB = document.getElementsByClassName('minLvlWeapon')[1];
+const priceWeaponB = document.getElementsByClassName('priceWeapon')[1];
+
 
 function refreshVisuals() {
-    document.getElementsByClassName('lvl')[0].innerHTML = "Lvl " + allyArray[0].lvl + "  ";
-    document.getElementsByClassName('name')[0].innerHTML = " " + allyArray[0].name;
-    document.getElementsByClassName('hp')[0].innerHTML = allyArray[0].hp;
-    document.getElementsByClassName('str')[0].innerHTML = allyArray[0].str;
-    document.getElementsByClassName('vit')[0].innerHTML = allyArray[0].vit;
-    document.getElementsByClassName('int')[0].innerHTML = allyArray[0].int;
-    document.getElementsByClassName('wis')[0].innerHTML = allyArray[0].wis;
-    document.getElementsByClassName('luck')[0].innerHTML = allyArray[0].luck;
-    document.getElementsByClassName('nameWeapon')[0].innerHTML = allyArray[0].lefthand.name;
-    document.getElementsByClassName('strWeapon')[0].innerHTML = allyArray[0].lefthand.str;
-    document.getElementsByClassName('magicWeapon')[0].innerHTML = allyArray[0].lefthand.magic;
-    document.getElementsByClassName('minLvlWeapon')[0].innerHTML = allyArray[0].lefthand.minlvl;
-    document.getElementsByClassName('priceWeapon')[0].innerHTML = allyArray[0].lefthand.price;
-    //document.getElementsByClassName('')[0].innerHTML = allyArray[0].;
-    //document.getElementsByClassName('')[0].innerHTML = allyArray[0].;
-    //document.getElementsByClassName('')[0].innerHTML = allyArray[0].;
+    lvlA.innerHTML = `Lvl ${allyArray[0].lvl}  `;
+    nameA.innerHTML = ` ${allyArray[0].name}`;
+    hpA.innerHTML = allyArray[0].hp;
+    strA.innerHTML = allyArray[0].str;
+    vitA.innerHTML = allyArray[0].vit;
+    intA.innerHTML = allyArray[0].int;
+    wisA.innerHTML = allyArray[0].wis;
+    luckA.innerHTML = allyArray[0].luck;
+    nameWeaponA.innerHTML = allyArray[0].lefthand.name;
+    strWeaponA.innerHTML = allyArray[0].lefthand.str;
+    magicWeaponA.innerHTML = allyArray[0].lefthand.magic;
+    minLvlWeaponA.innerHTML = allyArray[0].lefthand.minlvl;
+    priceWeaponA.innerHTML = allyArray[0].lefthand.price;
 
-    document.getElementsByClassName('lvl')[1].innerHTML = "Lvl " + enemyArray[0].lvl + "  ";
-    document.getElementsByClassName('name')[1].innerHTML = " " + enemyArray[0].name;
-    document.getElementsByClassName('hp')[1].innerHTML = enemyArray[0].hp;
-    document.getElementsByClassName('str')[1].innerHTML = enemyArray[0].str;
-    document.getElementsByClassName('vit')[1].innerHTML = enemyArray[0].vit;
-    document.getElementsByClassName('int')[1].innerHTML = enemyArray[0].int;
-    document.getElementsByClassName('wis')[1].innerHTML = enemyArray[0].wis;
-    document.getElementsByClassName('luck')[1].innerHTML = enemyArray[0].luck;
-    document.getElementsByClassName('nameWeapon')[1].innerHTML = enemyArray[0].lefthand.name;
-    document.getElementsByClassName('strWeapon')[1].innerHTML = enemyArray[0].lefthand.str;
-    document.getElementsByClassName('magicWeapon')[1].innerHTML = enemyArray[0].lefthand.magic;
-    document.getElementsByClassName('minLvlWeapon')[1].innerHTML = enemyArray[0].lefthand.minlvl;
-    document.getElementsByClassName('priceWeapon')[1].innerHTML = enemyArray[0].lefthand.price;
-    //document.getElementsByClassName('')[1].innerHTML = enemyArray[0].;
-    //document.getElementsByClassName('')[1].innerHTML = enemyArray[0].;
+    lvlB.innerHTML = `Lvl ${enemyArray[0].lvl} `;
+    nameB.innerHTML = ` ${enemyArray[0].name}`;
+    hpB.innerHTML = enemyArray[0].hp;
+    strB.innerHTML = enemyArray[0].str;
+    vitB.innerHTML = enemyArray[0].vit;
+    intB.innerHTML = enemyArray[0].int;
+    wisB.innerHTML = enemyArray[0].wis;
+    luckB.innerHTML = enemyArray[0].luck;
+    nameWeaponB.innerHTML = enemyArray[0].lefthand.name;
+    strWeaponB.innerHTML = enemyArray[0].lefthand.str;
+    magicWeaponB.innerHTML = enemyArray[0].lefthand.magic;
+    minLvlWeaponB.innerHTML = enemyArray[0].lefthand.minlvl;
+    priceWeaponB.innerHTML = enemyArray[0].lefthand.price;
 }
 
 //============-Gameplay-Combat-=================
