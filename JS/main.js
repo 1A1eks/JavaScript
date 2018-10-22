@@ -59,22 +59,26 @@ var enemyArray = new Array();
 
 var NPC = {name : "", age : 0, itemsToGive : []};
 
-const giveItem  = (character) => {return(character.itemsToGive)};
+const giveItem  = (NPC) => {return(NPC.itemsToGive)};
 
-function Character (name, lvl, hp, str, vit, magic, int, wis, luck, closeToLvlUp, lefthand, righthand) {
-    this.name = name,
-    this.lvl = lvl,
-    this.hp = hp,
-    this.str = str,
-    this.vit = vit,
-    this.magic = magic, 
-    this.int = int,
-    this.wis = wis,
-    this.luck = luck,
-    this.closeToLvlUp = closeToLvlUp,
-    this.lefthand = lefthand,
-    this.righthand = righthand        
-}
+
+class character {
+    constructor (name, lvl, hp, str, dex, magic, int, wis, luck, closeToLvlUp, lefthand, righthand) {
+        this.name = name,
+        this.lvl = lvl,
+        this.hp = hp,
+        this.str = str,
+        this.dex = dex,
+        this.magic = magic, 
+        this.int = int,
+        this.wis = wis,
+        this.luck = luck,
+        this.closeToLvlUp = closeToLvlUp,
+        this.lefthand = lefthand,
+        this.righthand = righthand        
+    }
+
+};
 
 function makeFist () {
     let fist = new item ("fist", 1, 0, 1, 0, false);
@@ -83,7 +87,7 @@ function makeFist () {
 //let fist = new item ("fist", 1, 0, 1, 0, false);
 
 function createCharacter () {
-    let char = new Character (generateName(), 1, makeHitPoints(), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9),
+    let char = new character (generateName(), 1, makeHitPoints(), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9),
     Math.ceil(Math.random()*5), false, makeFist(), makeFist());
     return(char);
 }
@@ -96,7 +100,6 @@ function makeHitPoints () {
         return 10;
     }
 }
-
 
 //===============For when making large scale dungeons && stuf later on===============================
 /*
@@ -140,47 +143,41 @@ if(initiated===false){
     initiated=true;
 };
 
-
-
-
-
-
-
-
-
-
 // update so doms go into variables!!
+const topbarMargin = document.getElementById('topbarBackground').style.marginRight;
+const topbarHeight = document.getElementById('topbarBackground').style.maxHeight;
+const topnavMargin = document.getElementById('topnavList').style.marginLeft;
+const externalLinks = document.getElementById("Links");
+const topNav = document.getElementById("Navs");
 
 function showExternalLinksClick() {
-    let externalLinks = document.getElementById("Links");
     if (externalLinks.style.display === "block") {
         externalLinks.style.display = "none";
-        document.getElementById('topbarBackground').style.marginRight = "10%";
-        document.getElementById('topbarBackground').style.maxHeight = "50px";
+        topbarMargin  = "10%";
+        topbarHeight = "50px";
     } else {
         externalLinks.style.display = "block";
-        document.getElementById('topbarBackground').style.marginRight = "0";
-        document.getElementById('topbarBackground').style.maxHeight = "300px";
+        topbarMargin = "0";
+        topbarHeight = "300px";
     }
   }
 
-  function showTopNav() {
-    let topNav = document.getElementById("Navs");
+function showTopNav() {
     if (topNav.style.display === "block") {
         topNav.style.display = "none";
-        document.getElementById('topnavList').style.marginLeft = "10%";
+        topnavMargin = "10%";
     } else {
         topNav.style.display = "block";
-        document.getElementById('topnavList').style.marginLeft = "0";
+        topnavMargin = "0";
     }
-  }
+}
 
 //==================-Gameplay--visuals/html&CSS-==========================
 const lvlA = document.getElementsByClassName('lvl')[0];
 const nameA = document.getElementsByClassName('name')[0];
 const hpA = document.getElementsByClassName('hp')[0];
 const strA = document.getElementsByClassName('str')[0];
-const vitA = document.getElementsByClassName('vit')[0];
+const dexA = document.getElementsByClassName('dex')[0];
 const intA = document.getElementsByClassName('int')[0];
 const wisA = document.getElementsByClassName('wis')[0];
 const luckA = document.getElementsByClassName('luck')[0];
@@ -194,7 +191,7 @@ const lvlB = document.getElementsByClassName('lvl')[1];
 const nameB =  document.getElementsByClassName('name')[1];
 const hpB = document.getElementsByClassName('hp')[1];
 const strB = document.getElementsByClassName('str')[1];
-const vitB = document.getElementsByClassName('vit')[1];
+const dexB = document.getElementsByClassName('dex')[1];
 const intB = document.getElementsByClassName('int')[1];
 const wisB = document.getElementsByClassName('wis')[1];
 const luckB = document.getElementsByClassName('luck')[1];
@@ -204,13 +201,12 @@ const magicWeaponB = document.getElementsByClassName('magicWeapon')[1];
 const minLvlWeaponB = document.getElementsByClassName('minLvlWeapon')[1];
 const priceWeaponB = document.getElementsByClassName('priceWeapon')[1];
 
-
 function refreshVisuals() {
     lvlA.innerHTML = `Lvl ${allyArray[0].lvl}  `;
     nameA.innerHTML = ` ${allyArray[0].name}`;
     hpA.innerHTML = allyArray[0].hp;
     strA.innerHTML = allyArray[0].str;
-    vitA.innerHTML = allyArray[0].vit;
+    dexA.innerHTML = allyArray[0].dex;
     intA.innerHTML = allyArray[0].int;
     wisA.innerHTML = allyArray[0].wis;
     luckA.innerHTML = allyArray[0].luck;
@@ -224,7 +220,7 @@ function refreshVisuals() {
     nameB.innerHTML = ` ${enemyArray[0].name}`;
     hpB.innerHTML = enemyArray[0].hp;
     strB.innerHTML = enemyArray[0].str;
-    vitB.innerHTML = enemyArray[0].vit;
+    dexB.innerHTML = enemyArray[0].dex;
     intB.innerHTML = enemyArray[0].int;
     wisB.innerHTML = enemyArray[0].wis;
     luckB.innerHTML = enemyArray[0].luck;
