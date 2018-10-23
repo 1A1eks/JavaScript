@@ -1,7 +1,7 @@
 
 let initiated = false;
 
-//=======Some generators============
+//=======Some-generators-and-vars-to-keep-track-of-stuff-============
 
 const generateName = () => {
     let name = "";
@@ -16,6 +16,10 @@ const generateName = () => {
     let number = Math.ceil(Math.random()*9);
     return(number);
 };
+
+
+var previousEnemyName = "none";
+var avoidRepetitionEnemy = 0;
 
 // =========shop and items===================
 
@@ -63,22 +67,65 @@ const giveItem  = (NPC) => {return(NPC.itemsToGive)};
 
 
 class character {
-    constructor (name, lvl, hp, str, dex, magic, int, wis, luck, closeToLvlUp, lefthand, righthand) {
+    constructor (name, lvl, hp, mana, str, dex, int, wis, luck, exp, lefthand, righthand) {
         this.name = name,
         this.lvl = lvl,
         this.hp = hp,
+        this.mana = mana, 
         this.str = str,
         this.dex = dex,
-        this.magic = magic, 
         this.int = int,
         this.wis = wis,
         this.luck = luck,
-        this.closeToLvlUp = closeToLvlUp,
+        this.exp = exp,
+        this.closeToLvlUp = false,
         this.lefthand = lefthand,
         this.righthand = righthand        
     }
 
-};
+}
+
+class human extends character {
+    constructor (...args) {
+        super(...args);
+    }
+}
+
+class troll extends character {
+    constructor (...args ) {
+        super(...args);
+    }
+}
+
+class goblin extends character {
+    constructor (...args ) {
+        super(...args);
+    }
+}
+
+class dwarf extends character {
+    constructor (...args ) {
+        super(...args);
+    }
+}
+
+class bear extends character {
+    constructor (...args) {
+        super(...args);
+    }
+}
+
+class boar extends character {
+    constructor (...args) {
+        super(...args);
+    }
+}
+
+class bunny extends character {
+    constructor (...args) {
+        super(...args);
+    }
+}
 
 function makeFist () {
     let fist = new item ("fist", 1, 0, 1, 0, false);
@@ -86,9 +133,9 @@ function makeFist () {
 }
 //let fist = new item ("fist", 1, 0, 1, 0, false);
 
-function createCharacter () {
-    let char = new character (generateName(), 1, makeHitPoints(), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9),
-    Math.ceil(Math.random()*5), false, makeFist(), makeFist());
+function createHuman () {
+    let char = new human (generateName(), 1, makeHitPoints(), 0, Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9),
+    Math.ceil(Math.random()*5), 0, makeFist(), makeFist());
     return(char);
 }
 
@@ -130,14 +177,14 @@ not actually doing other stuff
 */
 function InitiateAll () {
     if(enemyArray.length < 1){
-        enemyArray.push(createCharacter());
+        enemyArray.push(createHuman());
     }
     initiateShop();    
     initiated=true;
 }
 
 if(initiated===false){
-    const MC = createCharacter();
+    const MC = createHuman();
     allyArray.push(MC);
     InitiateAll();
     initiated=true;
@@ -173,6 +220,7 @@ function showTopNav() {
 }
 
 //==================-Gameplay--visuals/html&CSS-==========================
+//char-stats etc
 const lvlA = document.getElementsByClassName('lvl')[0];
 const nameA = document.getElementsByClassName('name')[0];
 const hpA = document.getElementsByClassName('hp')[0];
@@ -200,6 +248,14 @@ const strWeaponB = document.getElementsByClassName('strWeapon')[1];
 const magicWeaponB = document.getElementsByClassName('magicWeapon')[1];
 const minLvlWeaponB = document.getElementsByClassName('minLvlWeapon')[1];
 const priceWeaponB = document.getElementsByClassName('priceWeapon')[1];
+
+//other visual dom-elements
+const attackCommandDiv = document.getElementById('attack');
+const defendCommandDiv = document.getElementById('defend');
+const escapeCommandDiv = document.getElementById('escape');
+const lookAroundCommandDiv = document.getElementById('lookAround');
+const restCommandDiv = document.getElementById('rest');
+const hideCommandDiv = document.getElementById('hide');
 
 function refreshVisuals() {
     lvlA.innerHTML = `Lvl ${allyArray[0].lvl}  `;
@@ -229,6 +285,25 @@ function refreshVisuals() {
     magicWeaponB.innerHTML = enemyArray[0].lefthand.magic;
     minLvlWeaponB.innerHTML = enemyArray[0].lefthand.minlvl;
     priceWeaponB.innerHTML = enemyArray[0].lefthand.price;
+}
+
+function toggleBattleInstanceOn () {
+    attackCommandDiv.style.display = "block";
+    defendCommandDiv.style.display = "block";
+    escapeCommandDiv.style.display = "block";
+    lookAroundCommandDiv.style.display = "none";
+    restCommandDiv.style.display = "none";
+    hideCommandDiv.style.display = "none";
+}
+
+function toggleBattleInstanceOff () {
+    attackCommandDiv.style.display = "none";
+    defendCommandDiv.style.display = "none";
+    escapeCommandDiv.style.display = "none";
+    lookAroundCommandDiv.style.display = "block";
+    restCommandDiv.style.display = "block";
+    hideCommandDiv.style.display = "block";
+    
 }
 
 //============-Gameplay-Combat-=================
@@ -340,6 +415,7 @@ function executeAttack () {
        enemyArray[0].hp = 0;
        messagep    = "You killed the enemy."
     adjustBattleText(messagep);
+    toggleBattleInstanceOff();
     refreshVisuals();
     return;
    }

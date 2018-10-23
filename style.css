@@ -195,7 +195,17 @@ main {
     padding-left: 10px;
 }
 
+#lookAround {
+    display: none;
+}
 
+#rest {
+    display: none;
+}
+
+#hide {
+    display: none;
+}
 
 .battleCommands {
     display: flex;
