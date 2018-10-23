@@ -179,7 +179,8 @@ function InitiateAll () {
     if(enemyArray.length < 1){
         enemyArray.push(createHuman());
     }
-    initiateShop();    
+    initiateShop();
+    introStart();    
     initiated=true;
 }
 
@@ -306,6 +307,48 @@ function toggleBattleInstanceOff () {
     
 }
 
+function introStart () {
+    if (initiated === false) {
+        var introSections = document.getElementsByClassName("intro");
+        var overlayBackground = document.createElement('div');
+        document.body.insertAdjacentElement("afterbegin", overlayBackground);
+
+
+        overlayBackground.style.position = "fixed";
+        overlayBackground.style.top = "0";
+        overlayBackground.style.left = "0";
+        overlayBackground.style.backgroundColor = "#2a2929";
+        overlayBackground.style.width = "100%";
+        overlayBackground.style.height = "100vh";
+        overlayBackground.style.overflow = "scroll";
+
+        console.log("ok2" + initiated);
+        introSections[0].style.position ="fixed";
+        introSections[0].style.zIndex = "99";
+        introSections[0].style.width = "50%";
+        introSections[0].style.top = "0%";
+        introSections[0].style.marginLeft = "-350px";
+        introSections[0].style.left = "50%";
+
+        introSections[1].style.position ="fixed";
+        introSections[1].style.zIndex = "99";
+        introSections[1].style.width = "50%";
+        introSections[1].style.marginLeft = "180px";
+        introSections[1].style.top = "0%";
+        introSections[1].style.left = "5%";
+
+        introSections[2].style.position ="fixed";
+        introSections[2].style.zIndex = "99";
+        introSections[2].style.top = "50%";
+        introSections[2].style.textAlign = "center";
+        introSections[2].style.left = "50%";
+        introSections[2].style.marginLeft = "-325px";}
+
+        
+
+
+    
+}
 //============-Gameplay-Combat-=================
 
 //=========-Goes-into-character-Class?-======================
