@@ -56,34 +56,51 @@
     <section class="intro" id="char1">
         <dl>            
             <dt><span class="lvl"></span><span class="name">Name1</span></dt>
-            <dd><span>hp: </span><span class="hp"></span></dd>
-            <dd><span>str: </span><span class="str"></span></dd>
-            <dd><span>dex: </span><span class="dex"></span></dd>
-            <dd><span>int: </span><span class="int"></span></dd>
-            <dd><span>wis: </span><span class="wis"></span></dd>
-            <dd><span>luck: </span><span class="luck"></span></dd>
+            <dd><button class="stats" id="statsButtonChar1" onclick="toggleCharStats1()">STATS</button>
+                </dd>
+                <div id="statsChar1"> 
+                        <dd><span>hp: </span><span class="hp"></span></dd>
+                        <dd><span>str: </span><span class="str"></span></dd>
+                        <dd><span>dex: </span><span class="dex"></span></dd>
+                        <dd><span>int: </span><span class="int"></span></dd>
+                        <dd><span>wis: </span><span class="wis"></span></dd>
+                        <dd><span>luck: </span><span class="luck"></span></dd>
+                        
+                    </div>
             <dt><span class="nameWeapon">Weapon1</span></dt>
+            <dd><button class="stats" id="statsButtonCharW1" onclick="toggleCharStatsWeapon1()">STATS</button>
+                </dd>
+                <div id="statsCharW1"> 
             <dd><span>str: </span><span class="strWeapon"></span></dd>
             <dd><span>magic: </span><span class="magicWeapon"></span></dd>
             <dd><span>minLvl: </span><span class="minLvlWeapon"></span></dd>
             <dd><span>price: </span><span class="priceWeapon"></span></dd>
+            </div>
           </dl>
     </section>
 
     <section class="intro" id="char2">
         <dl id="wrapper">
                 <dt><span class="lvl"></span><span class="name">Nvve2</span></dt>
-                <dd><span>hp: </span><span class="hp"></span></dd>
-                <dd><span>str: </span><span class="str"></span></dd>
-                <dd><span>dex: </span><span class="dex"></span></dd>
-                <dd><span>int: </span><span class="int"></span></dd>
-                <dd><span>wis: </span><span class="wis"></span></dd>
-                <dd><span>luck: </span><span class="luck"></span></dd>
+                <dd><button class="stats" id="statsButtonChar2" onclick="toggleCharStats2()">STATS</button></dd>
+                <div id="statsChar2"> 
+                        <dd><span>hp: </span><span class="hp"></span></dd>
+                        <dd><span>str: </span><span class="str"></span></dd>
+                        <dd><span>dex: </span><span class="dex"></span></dd>
+                        <dd><span>int: </span><span class="int"></span></dd>
+                        <dd><span>wis: </span><span class="wis"></span></dd>
+                        <dd><span>luck: </span><span class="luck"></span></dd>
+                        
+                    </div>
                 <dt><span class="nameWeapon">Weapon2</span></dt>
+                <dd><button class="stats" id="statsButtonCharW2" onclick="toggleCharStatsWeapon2()">STATS</button>
+                    </dd>
+                <div id="statsCharW2"> 
                 <dd><span>str: </span><span class="strWeapon"></span></dd>
                 <dd><span>magic: </span><span class="magicWeapon"></span></dd>
                 <dd><span>minLvl: </span><span class="minLvlWeapon"></span></dd>
                 <dd><span>price: </span><span class="priceWeapon"></span></dd>
+                </div>
               </dl>
     </section>
     <section class="intro" id="battleControl" >

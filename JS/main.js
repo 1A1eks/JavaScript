@@ -303,10 +303,45 @@ function toggleBattleInstanceOff () {
     escapeCommandDiv.style.display = "none";
     lookAroundCommandDiv.style.display = "block";
     restCommandDiv.style.display = "block";
-    hideCommandDiv.style.display = "block";
-    
+    hideCommandDiv.style.display = "block";    
 }
 
+var statsChar1 = document.getElementById('statsChar1');
+var statsChar2 = document.getElementById('statsChar2');
+var statsCharWeapon1 = document.getElementById('statsCharW1');
+var statsCharWeapon2 = document.getElementById('statsCharW2');
+
+function toggleCharStats1 () {
+    if (statsChar1.style.display === "block") {
+        statsChar1.style.display = "none";
+    } else {
+        statsChar1.style.display = "block";
+    }
+}
+
+function toggleCharStats2 () {
+    if (statsChar2.style.display === "block") {
+        statsChar2.style.display = "none";
+    } else {
+        statsChar2.style.display = "block";
+    }
+}
+
+function toggleCharStatsWeapon1 () {
+    if (statsCharWeapon1.style.display === "block") {
+        statsCharWeapon1.style.display = "none";
+    } else {
+        statsCharWeapon1.style.display = "block";
+    }
+}
+
+function toggleCharStatsWeapon2 () {
+    if (statsCharWeapon2.style.display === "block") {
+        statsCharWeapon2.style.display = "none";
+    } else {
+        statsCharWeapon2.style.display = "block";
+    }
+}
 
 function introStart () {
     if (initiated === false) {
@@ -330,14 +365,14 @@ function introStart () {
 
         console.log("ok2" + initiated);
         introSections[0].style.position ="fixed";
-        introSections[0].style.zIndex = "99";
+        introSections[0].style.zIndex = "100";
         introSections[0].style.width = "50%";
         introSections[0].style.top = "0%";
         introSections[0].style.marginLeft = "-500px";
         introSections[0].style.left = "50%";
 
         introSections[1].style.position ="fixed";
-        introSections[1].style.zIndex = "99";
+        introSections[1].style.zIndex = "100";
         introSections[1].style.width = "50%";
         introSections[1].style.marginLeft = "350px";
         introSections[1].style.top = "0%";

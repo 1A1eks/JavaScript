@@ -208,6 +208,34 @@ main {
     flex-direction: column;
 }
 
+.stats {
+    background-color: #5f5d5d;
+    border: 4px;
+    border-color: #504e4e;
+    border-radius: 2px;
+    border-style: solid;
+}
+
+#statsChar1 {
+    display:none;
+    overflow: visible;
+    margin-left: 80px;
+}
+
+#statsChar2 {
+    display:none;
+    margin-left: 120px;
+    margin-right: -40px;
+}
+
+#statsCharW1 {
+    display: none;
+}
+
+#statsCharW2 {
+    display: none;
+}
+
 #char1 {
     padding-left: 10px;
 }
