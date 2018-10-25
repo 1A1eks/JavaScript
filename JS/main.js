@@ -17,7 +17,6 @@ const generateName = () => {
     return(number);
 };
 
-
 var previousEnemyName = "none";
 var avoidRepetitionEnemy = 0;
 
@@ -64,7 +63,6 @@ var enemyArray = new Array();
 var NPC = {name : "", age : 0, itemsToGive : []};
 
 const giveItem  = (NPC) => {return(NPC.itemsToGive)};
-
 
 class character {
     constructor (name, lvl, hp, mana, str, dex, int, wis, luck, exp, lefthand, righthand) {
@@ -169,123 +167,55 @@ function createDungeon (difficulty) {
 }
 */
 
-/*============Initiating Game===========
+/*============Loading Game===========
 check for previous starting point or save first & other stuff
 
 Only to make sure page is displayed properly, + menu functions for mobile.
 not actually doing other stuff
-*/
-function InitiateAll () {
-    if(enemyArray.length < 1){
-        enemyArray.push(createHuman());
-    }
-    initiateShop();
-    introStart();    
-    initiated=true;
-}
 
-if(initiated===false){
-    const MC = createHuman();
-    allyArray.push(MC);
-    InitiateAll();
-    initiated=true;
-};
+!!!!not calling anything yet, only making it.
 
-// update so doms go into variables!!
-const topbarMargin = document.getElementById('topbarBackground').style.marginRight;
-const topbarHeight = document.getElementById('topbarBackground').style.maxHeight;
-const topnavMargin = document.getElementById('topnavList').style.marginLeft;
+update so doms go into variables!!*/
+const topbarBackground = document.getElementById('topbarBackground');
+const topbarHeight = document.getElementById('topbarBackground');
+const topnavMargin = document.getElementById('topnavList');
 const externalLinks = document.getElementById("Links");
 const topNav = document.getElementById("Navs");
 
-function showExternalLinksClick() {
-    if (externalLinks.style.display === "block") {
-        externalLinks.style.display = "none";
-        topbarMargin  = "10%";
-        topbarHeight = "50px";
-    } else {
-        externalLinks.style.display = "block";
-        topbarMargin = "0";
-        topbarHeight = "300px";
-    }
-  }
-
-function showTopNav() {
-    if (topNav.style.display === "block") {
-        topNav.style.display = "none";
-        topnavMargin = "10%";
-    } else {
-        topNav.style.display = "block";
-        topnavMargin = "0";
-    }
-}
-
-//==================-Gameplay--visuals/html&CSS-==========================
-//char-stats etc
-const lvlA = document.getElementsByClassName('lvl')[0];
-const nameA = document.getElementsByClassName('name')[0];
-const hpA = document.getElementsByClassName('hp')[0];
-const strA = document.getElementsByClassName('str')[0];
-const dexA = document.getElementsByClassName('dex')[0];
-const intA = document.getElementsByClassName('int')[0];
-const wisA = document.getElementsByClassName('wis')[0];
-const luckA = document.getElementsByClassName('luck')[0];
-const nameWeaponA = document.getElementsByClassName('nameWeapon')[0];
-const strWeaponA = document.getElementsByClassName('strWeapon')[0];
-const magicWeaponA = document.getElementsByClassName('magicWeapon')[0];
-const minLvlWeaponA = document.getElementsByClassName('minLvlWeapon')[0];
-const priceWeaponA = document.getElementsByClassName('priceWeapon')[0];
-
-const lvlB = document.getElementsByClassName('lvl')[1];
-const nameB =  document.getElementsByClassName('name')[1];
-const hpB = document.getElementsByClassName('hp')[1];
-const strB = document.getElementsByClassName('str')[1];
-const dexB = document.getElementsByClassName('dex')[1];
-const intB = document.getElementsByClassName('int')[1];
-const wisB = document.getElementsByClassName('wis')[1];
-const luckB = document.getElementsByClassName('luck')[1];
-const nameWeaponB = document.getElementsByClassName('nameWeapon')[1];
-const strWeaponB = document.getElementsByClassName('strWeapon')[1];
-const magicWeaponB = document.getElementsByClassName('magicWeapon')[1];
-const minLvlWeaponB = document.getElementsByClassName('minLvlWeapon')[1];
-const priceWeaponB = document.getElementsByClassName('priceWeapon')[1];
-
-//other visual dom-elements
+/*other visual dom-elements*/
 const attackCommandDiv = document.getElementById('attack');
 const defendCommandDiv = document.getElementById('defend');
 const escapeCommandDiv = document.getElementById('escape');
 const lookAroundCommandDiv = document.getElementById('lookAround');
 const restCommandDiv = document.getElementById('rest');
 const hideCommandDiv = document.getElementById('hide');
+/*elements needed for overlay*/
+var statsChar1 = document.getElementById('statsChar1');
+var statsChar2 = document.getElementById('statsChar2');
+var statsCharWeapon1 = document.getElementById('statsCharW1');
+var statsCharWeapon2 = document.getElementById('statsCharW2');
 
-function refreshVisuals() {
-    lvlA.innerHTML = `Lvl ${allyArray[0].lvl}  `;
-    nameA.innerHTML = ` ${allyArray[0].name}`;
-    hpA.innerHTML = allyArray[0].hp;
-    strA.innerHTML = allyArray[0].str;
-    dexA.innerHTML = allyArray[0].dex;
-    intA.innerHTML = allyArray[0].int;
-    wisA.innerHTML = allyArray[0].wis;
-    luckA.innerHTML = allyArray[0].luck;
-    nameWeaponA.innerHTML = allyArray[0].lefthand.name;
-    strWeaponA.innerHTML = allyArray[0].lefthand.str;
-    magicWeaponA.innerHTML = allyArray[0].lefthand.magic;
-    minLvlWeaponA.innerHTML = allyArray[0].lefthand.minlvl;
-    priceWeaponA.innerHTML = allyArray[0].lefthand.price;
 
-    lvlB.innerHTML = `Lvl ${enemyArray[0].lvl} `;
-    nameB.innerHTML = ` ${enemyArray[0].name}`;
-    hpB.innerHTML = enemyArray[0].hp;
-    strB.innerHTML = enemyArray[0].str;
-    dexB.innerHTML = enemyArray[0].dex;
-    intB.innerHTML = enemyArray[0].int;
-    wisB.innerHTML = enemyArray[0].wis;
-    luckB.innerHTML = enemyArray[0].luck;
-    nameWeaponB.innerHTML = enemyArray[0].lefthand.name;
-    strWeaponB.innerHTML = enemyArray[0].lefthand.str;
-    magicWeaponB.innerHTML = enemyArray[0].lefthand.magic;
-    minLvlWeaponB.innerHTML = enemyArray[0].lefthand.minlvl;
-    priceWeaponB.innerHTML = enemyArray[0].lefthand.price;
+function showExternalLinksClick() {
+    if (externalLinks.style.display === "block") {
+        externalLinks.style.display = "none";
+        topbarBackground.style.marginRight  = "1em";
+        topbarBackground.style.maxHeight = "50px";
+    } else {
+        externalLinks.style.display = "block";
+        topbarBackground.style.marginRight = "0em";
+        topbarBackground.style.maxHeight = "300px";
+    }
+  }
+
+function showTopNav() {
+    if (topNav.style.display === "block") {
+        topNav.style.display = "none";
+        topnavMargin.style.marginLeft = "1em";
+    } else {
+        topNav.style.display = "block";
+        topnavMargin.style.marginLeft = "0em";
+    }
 }
 
 function toggleBattleInstanceOn () {
@@ -305,11 +235,6 @@ function toggleBattleInstanceOff () {
     restCommandDiv.style.display = "block";
     hideCommandDiv.style.display = "block";    
 }
-
-var statsChar1 = document.getElementById('statsChar1');
-var statsChar2 = document.getElementById('statsChar2');
-var statsCharWeapon1 = document.getElementById('statsCharW1');
-var statsCharWeapon2 = document.getElementById('statsCharW2');
 
 function toggleCharStats1 () {
     if (statsChar1.style.display === "block") {
@@ -343,93 +268,66 @@ function toggleCharStatsWeapon2 () {
     }
 }
 
-function introStart () {
-    if (initiated === false) {
+//*==================-Gameplay--visuals/html&CSS-==========================
+//char-stats etc*/
+const lvlA = document.getElementsByClassName('lvl')[0];
+const nameA = document.getElementsByClassName('name')[0];
+const hpA = document.getElementsByClassName('hp')[0];
+const strA = document.getElementsByClassName('str')[0];
+const dexA = document.getElementsByClassName('dex')[0];
+const intA = document.getElementsByClassName('int')[0];
+const wisA = document.getElementsByClassName('wis')[0];
+const luckA = document.getElementsByClassName('luck')[0];
+const nameWeaponA = document.getElementsByClassName('nameWeapon')[0];
+const strWeaponA = document.getElementsByClassName('strWeapon')[0];
+const magicWeaponA = document.getElementsByClassName('magicWeapon')[0];
+const minLvlWeaponA = document.getElementsByClassName('minLvlWeapon')[0];
+const priceWeaponA = document.getElementsByClassName('priceWeapon')[0];
 
-        var viewportWidth = window.innerWidth;
-        var viewportHeight = window.innerHeight;
-        //BIG-SCREENS
-        if (viewportWidth > 1080) {
-        var batText = document.getElementsByClassName('battleText')[0];
-        var introSections = document.getElementsByClassName("intro");
-        var overlayBackground = document.createElement('div');
-        document.body.insertAdjacentElement("afterbegin", overlayBackground);
+const lvlB = document.getElementsByClassName('lvl')[1];
+const nameB =  document.getElementsByClassName('name')[1];
+const hpB = document.getElementsByClassName('hp')[1];
+const strB = document.getElementsByClassName('str')[1];
+const dexB = document.getElementsByClassName('dex')[1];
+const intB = document.getElementsByClassName('int')[1];
+const wisB = document.getElementsByClassName('wis')[1];
+const luckB = document.getElementsByClassName('luck')[1];
+const nameWeaponB = document.getElementsByClassName('nameWeapon')[1];
+const strWeaponB = document.getElementsByClassName('strWeapon')[1];
+const magicWeaponB = document.getElementsByClassName('magicWeapon')[1];
+const minLvlWeaponB = document.getElementsByClassName('minLvlWeapon')[1];
+const priceWeaponB = document.getElementsByClassName('priceWeapon')[1];
 
-        overlayBackground.style.position = "fixed";
-        overlayBackground.style.top = "0";
-        overlayBackground.style.left = "0";
-        overlayBackground.style.backgroundColor = "#2a2929";
-        overlayBackground.style.width = "100%";
-        overlayBackground.style.height = "100vh";
-        overlayBackground.style.overflow = "scroll";
+function refreshVisuals() {
+    lvlA.innerHTML = `Lvl ${allyArray[0].lvl}  `;
+    nameA.innerHTML = ` ${allyArray[0].name}`;
+    hpA.innerHTML = allyArray[0].hp;
+    strA.innerHTML = allyArray[0].str;
+    dexA.innerHTML = allyArray[0].dex;
+    intA.innerHTML = allyArray[0].int;
+    wisA.innerHTML = allyArray[0].wis;
+    luckA.innerHTML = allyArray[0].luck;
+    nameWeaponA.innerHTML = allyArray[0].lefthand.name;
+    strWeaponA.innerHTML = allyArray[0].lefthand.str;
+    magicWeaponA.innerHTML = allyArray[0].lefthand.magic;
+    minLvlWeaponA.innerHTML = allyArray[0].lefthand.minlvl;
+    priceWeaponA.innerHTML = allyArray[0].lefthand.price;
 
-        console.log("ok2" + initiated);
-        introSections[0].style.position ="fixed";
-        introSections[0].style.zIndex = "100";
-        introSections[0].style.width = "50%";
-        introSections[0].style.top = "0%";
-        introSections[0].style.marginLeft = "-500px";
-        introSections[0].style.left = "50%";
-
-        introSections[1].style.position ="fixed";
-        introSections[1].style.zIndex = "100";
-        introSections[1].style.width = "50%";
-        introSections[1].style.marginLeft = "350px";
-        introSections[1].style.top = "0%";
-        introSections[1].style.left = "5%";
-
-        introSections[2].style.position ="fixed";
-        introSections[2].style.zIndex = "99";
-        introSections[2].style.top = "10%";
-        introSections[2].style.textAlign = "center";
-        introSections[2].style.left = "50%";
-        introSections[2].style.marginLeft = "-325px";
-
-        batText.style.border = "none";
-        //MEDIUM-SCREENS    
-        } else if (viewportWidth > 720) {
-        var batText = document.getElementsByClassName('battleText')[0];
-        var introSections = document.getElementsByClassName("intro");
-        var overlayBackground = document.createElement('div');
-        document.body.insertAdjacentElement("afterbegin", overlayBackground);
-
-        overlayBackground.style.position = "fixed";
-        overlayBackground.style.top = "0";
-        overlayBackground.style.left = "0";
-        overlayBackground.style.backgroundColor = "#2a2929";
-        overlayBackground.style.width = "100%";
-        overlayBackground.style.height = "100vh";
-        overlayBackground.style.overflow = "scroll";
-
-        console.log("ok2" + initiated);
-        introSections[0].style.position ="fixed";
-        introSections[0].style.zIndex = "99";
-        introSections[0].style.width = "50%";
-        introSections[0].style.top = "0%";
-        introSections[0].style.marginLeft = "-350px";
-        introSections[0].style.left = "50%";
-
-        introSections[1].style.position ="fixed";
-        introSections[1].style.zIndex = "99";
-        introSections[1].style.width = "50%";
-        introSections[1].style.marginLeft = "180px";
-        introSections[1].style.top = "0%";
-        introSections[1].style.left = "5%";
-
-        introSections[2].style.position ="fixed";
-        introSections[2].style.zIndex = "99";
-        introSections[2].style.top = "50%";
-        introSections[2].style.textAlign = "center";
-        introSections[2].style.left = "50%";
-        introSections[2].style.marginLeft = "-325px";
-
-        batText.style.border = "none";
-        //MOBILE-VERSIONS
-        } else {
-
-        }
-    }    
+    lvlB.innerHTML = `Lvl ${enemyArray[0].lvl} `;
+    nameB.innerHTML = ` ${enemyArray[0].name}`;
+    hpB.innerHTML = enemyArray[0].hp;
+    strB.innerHTML = enemyArray[0].str;
+    dexB.innerHTML = enemyArray[0].dex;
+    intB.innerHTML = enemyArray[0].int;
+    wisB.innerHTML = enemyArray[0].wis;
+    luckB.innerHTML = enemyArray[0].luck;
+    nameWeaponB.innerHTML = enemyArray[0].lefthand.name;
+    strWeaponB.innerHTML = enemyArray[0].lefthand.str;
+    magicWeaponB.innerHTML = enemyArray[0].lefthand.magic;
+    minLvlWeaponB.innerHTML = enemyArray[0].lefthand.minlvl;
+    priceWeaponB.innerHTML = enemyArray[0].lefthand.price;
 }
+
 //============-Gameplay-Combat-=================
 
 //=========-Goes-into-character-Class?-======================
@@ -500,16 +398,13 @@ function counterAttack () {
 
 }
 
-
-
-
 //==============-Visual output from combat-=====================
 
 function executeAttack () {
    let returned =  attack(allyArray[0], enemyArray[0]);
    allyArray[0].hp-=returned[1];
    enemyArray[0].hp-=returned[2];
-    let messagep = "";
+   let messagep = "";
    if(document.getElementsByClassName('battleText')[0].childElementCount > 8) {
     if (enemyArray[0].hp <= 0) {
         enemyArray[0].hp = 0;
@@ -563,23 +458,22 @@ function executeAttack () {
 function adjustBattleText(message1) {
 
     if (document.getElementsByClassName('battleText')[0].childElementCount < 10){
-   var count = document.getElementsByClassName('battleText')[0].childElementCount -1;
-   console.log(document.getElementsByClassName('battleText')[0].childElementCount + "   " + `p${count}`);
+    var count = document.getElementsByClassName('battleText')[0].childElementCount -1;
+    console.log(document.getElementsByClassName('battleText')[0].childElementCount + "   " + `p${count}`);
      
-   
-   let p = `<p id="p${document.getElementsByClassName('battleText')[0].childElementCount}">paragraph</p>`;
-   console.log(p);
+    let p = `<p id="p${document.getElementsByClassName('battleText')[0].childElementCount}">paragraph</p>`;
+    console.log(p);
 
-   document.getElementById(`p${count}`).insertAdjacentHTML('afterend', p);
+    document.getElementById(`p${count}`).insertAdjacentHTML('afterend', p);
 
-   document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
-   = message1;
-   //document.getElementById(`p${count}`).scrollIntoView();
-   return;
+    document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
+    = message1;
+    //document.getElementById(`p${count}`).scrollIntoView();
+    return;
     }
 
-   var count = document.getElementsByClassName('battleText')[0].childElementCount -1;
-   console.log(document.getElementsByClassName('battleText')[0].childElementCount + "   " + `p${count}`);
+    var count = document.getElementsByClassName('battleText')[0].childElementCount -1;
+    console.log(document.getElementsByClassName('battleText')[0].childElementCount + "   " + `p${count}`);
 
     let temporary = "";
     for (let i = count; i >  0; i--) {
@@ -593,24 +487,29 @@ function adjustBattleText(message1) {
 
 ////needs updating for performance!------------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
 // returns message, dmgA, dmgB, message if charB counterattacks
 //    attack(allyArray[0], enemyArray[0]);
+function InitiateAll () {
+    if(enemyArray.length < 1){
+        enemyArray.push(createHuman());
+    }
+    initiateShop();
+    introStart();    
+    initiated=true;
+}
+
+
+if(initiated===false){
+    const MC = createHuman();
+    allyArray.push(MC);
+    InitiateAll();
+    initiated=true;
+};
 
 //===========-Actually calling functions to play-=============================
 
 InitiateAll();
 refreshVisuals();
-
-console.log(document.getElementById("attack"));
 
 document.getElementById("attack").addEventListener("click", (event)=>executeAttack());
 
