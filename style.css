@@ -216,6 +216,7 @@ main {
     border-color: #504e4e;
     border-radius: 2px;
     border-style: solid;
+    position: absolute;
 }
 
 #statsChar1 {

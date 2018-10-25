@@ -497,7 +497,7 @@ function InitiateAll () {
         enemyArray.push(createHuman());
     }
     initiateShop();
-    introStart();    
+    startTutorial();    
     initiated=true;
 }
 
