@@ -1,20 +1,24 @@
 
-var battleText = document.getElementById('battleText');
-var wrapper = document.getElementById('wrapper');
-
-
+const battleText = document.getElementById('battleText');
+const wrapper = document.getElementById('wrapper');
+const viewportWidth = window.innerWidth;
+const viewportHeight = window.innerHeight;
+const buttonStatsChar1 = document.getElementById('statsButtonChar1');
+const buttonStatsChar2 = document.getElementById('statsButtonChar2');
+const buttonStatsCharW1 = document.getElementById('statsButtonCharW1');
+const buttonStatsCharW2 = document.getElementById('statsButtonCharW2');
+const surroundings = document.getElementById('surroundings');
 
 
 function introStart () {   
-    if (initiated === false) {  
+    
+    if (initiated === false) {          
 
-        var viewportWidth = window.innerWidth;
-        var viewportHeight = window.innerHeight;
+        surroundings.style.display = "none";
+        var overlayBackground = document.createElement('div');
         /*BIG-SCREENS*/
         if (viewportWidth > 1080) {
-        var batText = document.getElementsByClassName('battleText')[0];
-        var introSections = document.getElementsByClassName("intro");
-        var overlayBackground = document.createElement('div');
+            const introSections = document.getElementsByClassName("intro");
         document.body.insertAdjacentElement("afterbegin", overlayBackground);
 
         overlayBackground.style.position = "fixed";
@@ -24,6 +28,7 @@ function introStart () {
         overlayBackground.style.width = "100%";
         overlayBackground.style.height = "100vh";
         overlayBackground.style.overflow = "scroll";
+        overlayBackground.style.zIndex = "15";
 
         /*console.log("ok2" + initiated);*/
         introSections[0].style.position ="fixed";
@@ -47,12 +52,11 @@ function introStart () {
         introSections[2].style.left = "50%";
         introSections[2].style.marginLeft = "-325px";
 
-        batText.style.border = "none";
+        battleText.style.border = "none";
         battleText.style.setProperty('width', '100%');
         /*MEDIUM-SCREENS  */  
         } else if (viewportWidth > 720) {
-        var batText = document.getElementsByClassName('battleText')[0];
-        var introSections = document.getElementsByClassName("intro");
+            const introSections = document.getElementsByClassName("intro");
         var overlayBackground = document.createElement('div');
         document.body.insertAdjacentElement("afterbegin", overlayBackground);
 
@@ -84,7 +88,7 @@ function introStart () {
         introSections[2].style.left = "50%";
         introSections[2].style.marginLeft = "-325px";
 
-        batText.style.border = "none";
+        battleText.style.border = "none";
         battleText.style.width = "100%";
         /*MOBILE-VERSIONS*/
         } else {

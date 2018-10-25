@@ -489,6 +489,9 @@ function adjustBattleText(message1) {
 
 // returns message, dmgA, dmgB, message if charB counterattacks
 //    attack(allyArray[0], enemyArray[0]);
+
+
+var introSections = document.getElementsByClassName("intro");
 function InitiateAll () {
     if(enemyArray.length < 1){
         enemyArray.push(createHuman());
