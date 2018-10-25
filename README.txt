@@ -38,6 +38,8 @@ Not programming, but functional values related:
 
 -https://en.wikipedia.org/wiki/Dynamic_game_difficulty_balancing#Dynamic_game_elements
 
+credit idea explosions: Sammy
+
 -https://gamedev.stackexchange.com/questions/14309/how-to-develop-rpg-damage-formulas
 
 -------------------------------------
