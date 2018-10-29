@@ -142,6 +142,7 @@
         border-radius: 6px;
         overflow: scroll;
         width: 80%;
+        min-width: 600px;
     }
     
     .battleText2 { 
@@ -250,6 +251,10 @@ main {
 
 #char1 {
     padding-left: 10px;
+}
+
+#char2 {
+    display:block;
 }
 
 #lookAround {

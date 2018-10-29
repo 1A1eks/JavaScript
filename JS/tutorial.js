@@ -30,7 +30,9 @@ function startTutorial () {
         overlayBackground.style.overflow = "scroll";
         overlayBackground.style.zIndex = "15";
 
-        /*console.log("ok2" + initiated);*/
+        /*console.log("ok2" + initiated);
+        !!!!! try to loop doubled values!!!
+        */
         introSections[0].style.position ="fixed";
         introSections[0].style.zIndex = "100";
         introSections[0].style.width = "50%";
@@ -94,8 +96,8 @@ function startTutorial () {
         } else {
 
         }
-    }
-    introSections[1].style.display = "none";    
+        toggleDivChar2();
+    }  
 }
 
 function endTutorial () {

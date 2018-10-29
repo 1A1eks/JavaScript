@@ -64,7 +64,7 @@ var NPC = {name : "", age : 0, itemsToGive : []};
 
 const giveItem  = (NPC) => {return(NPC.itemsToGive)};
 
-class character {
+class Character {
     constructor (name, lvl, hp, mana, str, dex, int, wis, luck, exp, lefthand, righthand) {
         this.name = name,
         this.lvl = lvl,
@@ -83,43 +83,43 @@ class character {
 
 }
 
-class human extends character {
+class Human extends Character {
     constructor (...args) {
         super(...args);
     }
 }
 
-class troll extends character {
+class Troll extends Character {
     constructor (...args ) {
         super(...args);
     }
 }
 
-class goblin extends character {
+class Goblin extends Character {
     constructor (...args ) {
         super(...args);
     }
 }
 
-class dwarf extends character {
+class dwarf extends Character {
     constructor (...args ) {
         super(...args);
     }
 }
 
-class bear extends character {
+class Bear extends Character {
     constructor (...args) {
         super(...args);
     }
 }
 
-class boar extends character {
+class boar extends Character {
     constructor (...args) {
         super(...args);
     }
 }
 
-class bunny extends character {
+class Bunny extends Character {
     constructor (...args) {
         super(...args);
     }
@@ -132,7 +132,7 @@ function makeFist () {
 //let fist = new item ("fist", 1, 0, 1, 0, false);
 
 function createHuman () {
-    let char = new human (generateName(), 1, makeHitPoints(), 0, Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9),
+    let char = new Human (generateName(), 1, makeHitPoints(), 0, Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9),
     Math.ceil(Math.random()*5), 0, makeFist(), makeFist());
     return(char);
 }
@@ -167,7 +167,7 @@ function createDungeon (difficulty) {
 }
 */
 
-/*============Loading Game===========
+/*============Loading Game & Toggling functions===========
 check for previous starting point or save first & other stuff
 
 Only to make sure page is displayed properly, + menu functions for mobile.
@@ -194,6 +194,8 @@ var statsChar1 = document.getElementById('statsChar1');
 var statsChar2 = document.getElementById('statsChar2');
 var statsCharWeapon1 = document.getElementById('statsCharW1');
 var statsCharWeapon2 = document.getElementById('statsCharW2');
+/*toggleable elements for tutorial and maybe later*/
+const charEnemy = document.getElementById('char2');
 
 
 function showExternalLinksClick() {
@@ -218,22 +220,31 @@ function showTopNav() {
     }
 }
 
-function toggleBattleInstanceOn () {
+function toggleBattleInstance () {
+    if (attackCommandDiv.style.display === "none" || hideCommandDiv.style.display === "block") {
     attackCommandDiv.style.display = "block";
     defendCommandDiv.style.display = "block";
     escapeCommandDiv.style.display = "block";
     lookAroundCommandDiv.style.display = "none";
     restCommandDiv.style.display = "none";
     hideCommandDiv.style.display = "none";
-}
-
-function toggleBattleInstanceOff () {
+    } else {        
     attackCommandDiv.style.display = "none";
     defendCommandDiv.style.display = "none";
     escapeCommandDiv.style.display = "none";
     lookAroundCommandDiv.style.display = "block";
     restCommandDiv.style.display = "block";
-    hideCommandDiv.style.display = "block";    
+    hideCommandDiv.style.display = "block"; 
+    }
+}
+
+function toggleBattleInstanceOff () {   
+    attackCommandDiv.style.display = "none";
+    defendCommandDiv.style.display = "none";
+    escapeCommandDiv.style.display = "none";
+    lookAroundCommandDiv.style.display = "none";
+    restCommandDiv.style.display = "none";
+    hideCommandDiv.style.display = "none"; 
 }
 
 function toggleCharStats1 () {
@@ -266,6 +277,14 @@ function toggleCharStatsWeapon2 () {
     } else {
         statsCharWeapon2.style.display = "block";
     }
+}
+
+function toggleDivChar2 () {
+    if (charEnemy.style.display === "none") {
+    charEnemy.style.display = "block";  
+    } else {
+        charEnemy.style.display = "none"; 
+    }  
 }
 
 //*==================-Gameplay--visuals/html&CSS-==========================
