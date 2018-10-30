@@ -419,46 +419,9 @@ function counterAttack () {
 
 //==============-Visual output from combat-=====================
 
-function executeAttack () {
-   let returned =  attack(allyArray[0], enemyArray[0]);
-   allyArray[0].hp-=returned[1];
-   enemyArray[0].hp-=returned[2];
-   let messagep = "";
-   if(document.getElementsByClassName('battleText')[0].childElementCount > 8) {
-    if (enemyArray[0].hp <= 0) {
-        enemyArray[0].hp = 0;
-        messagep     = "You killed the enemy."
-    adjustBattleText(messagep);
-    refreshVisuals();
-    return;
-    }     
-    switch (returned[0]) {
-         case "miss":
-         messagep         = "You missed.."
-         break;
-         case "You hit..":
-         messagep         = "You hit the enemy " + enemyArray[0].name + " for " + returned[2] + " damage!"
-         break;
-         case "~Critical Hit!~":
-         messagep         = "~Critical Hit!~ \n  You Critical hit for " + returned[2] + " damage!"
-         break;
-    }
-    adjustBattleText(messagep);
-    refreshVisuals();
-    return;
-   }
-
-   //===killing the enemy
-   if (enemyArray[0].hp <= 0) {
-       enemyArray[0].hp = 0;
-       messagep    = "You killed the enemy."
-    adjustBattleText(messagep);
-    toggleBattleInstanceOff();
-    refreshVisuals();
-    return;
-   }
-    
-   switch (returned[0]) {
+function attackMessage (message) {
+    let messagep = "";
+    switch (message) {        
         case "miss":
         messagep        = "You missed.."
         break;
@@ -467,8 +430,47 @@ function executeAttack () {
         break;
         case "~Critical Hit!~":
         messagep        = "~Critical Hit!~ \n  You Critical hit for " + returned[2] + " damage!"
-        break;
+        break;       
+    }
+    return messagep;
+}
+
+function isEnemyDead (Character) {
+    if(Character.hp <= 0) {
+        adjustBattleText(`You killed the enemy ${Character.name}`);
+    }
+}
+
+function executeAttack () {
+   let returned =  attack(allyArray[0], enemyArray[0]);
+   allyArray[0].hp-=returned[1];
+   enemyArray[0].hp-=returned[2];
+   let messagep = "";
+
+   if(document.getElementsByClassName('battleText')[0].childElementCount > 8) {
+    if (enemyArray[0].hp <= 0) {
+        enemyArray[0].hp = 0;
+        adjustBattleText(`You killed the enemy ${Character.name}`);
+        toggleBattleInstance();
+        refreshVisuals();
+        return;
+    } else { 
+        attackMessage(returned[0]);
+        adjustBattleText(messagep);
+        refreshVisuals();
+        return;
+    }
    }
+
+   //===killing the enemy
+   if (enemyArray[0].hp <= 0) {
+       enemyArray[0].hp = 0;
+        adjustBattleText(`You killed the enemy ${Character.name}`);
+        toggleBattleInstance();
+        refreshVisuals();
+        return;
+   }   
+   attackMessage(returned[0]);
    adjustBattleText(messagep);
    refreshVisuals();
 }
@@ -476,31 +478,23 @@ function executeAttack () {
 
 function adjustBattleText(message1) {
 
-    if (document.getElementsByClassName('battleText')[0].childElementCount < 10){
-    var count = document.getElementsByClassName('battleText')[0].childElementCount -1;
-    console.log(document.getElementsByClassName('battleText')[0].childElementCount + "   " + `p${count}`);
-     
+    if (document.getElementsByClassName('battleText')[0].childElementCount < 10) {
+    var count = document.getElementsByClassName('battleText')[0].childElementCount -1;     
     let p = `<p id="p${document.getElementsByClassName('battleText')[0].childElementCount}">paragraph</p>`;
-    console.log(p);
-
     document.getElementById(`p${count}`).insertAdjacentHTML('afterend', p);
-
-    document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
-    = message1;
-    //document.getElementById(`p${count}`).scrollIntoView();
+    document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML = message1;
     return;
     }
 
-    var count = document.getElementsByClassName('battleText')[0].childElementCount -1;
-    console.log(document.getElementsByClassName('battleText')[0].childElementCount + "   " + `p${count}`);
 
+    var count = document.getElementsByClassName('battleText')[0].childElementCount -1;
     let temporary = "";
     for (let i = count; i >  0; i--) {
         temporary = document.getElementsByTagName('p')[i].innerHTML;
         document.getElementsByTagName('p')[i].innerHTML = message1;
         message1 = temporary;
     }
-    //document.getElementById(`p${count}`).scrollIntoView();
+
     return;
 }
 
@@ -530,7 +524,7 @@ if(initiated===false){
 
 //===========-Actually calling functions to play-=============================
 
-InitiateAll();
+
 refreshVisuals();
 
 document.getElementById("attack").addEventListener("click", (event)=>executeAttack());

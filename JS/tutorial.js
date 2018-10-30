@@ -9,8 +9,21 @@ const buttonStatsCharW1 = document.getElementById('statsButtonCharW1');
 const buttonStatsCharW2 = document.getElementById('statsButtonCharW2');
 const surroundings = document.getElementById('surroundings');
 
+function askName () {
+    let name = prompt ('...right, your name was ');
+    return name;
+}
 
-function startTutorial () {   
+function saveName (string) {
+    allyArray[0].name = string;
+}
+
+function startTutorial () { 
+    
+    alert('You slowly start to come to your senses \n You cant seem to remember who you are or what you were doing...')
+
+    var name = askName();
+    saveName(name);
     
     if (initiated === false) {          
 
@@ -97,6 +110,7 @@ function startTutorial () {
 
         }
         toggleDivChar2();
+        toggleBattleInstanceOff();
     }  
 }
 
@@ -141,39 +155,38 @@ function endTutorial () {
         var overlayBackground = document.createElement('div');
         document.body.insertAdjacentElement("afterbegin", overlayBackground);
 
-        overlayBackground.style.position = "fixed";
-        overlayBackground.style.top = "0";
-        overlayBackground.style.left = "0";
-        overlayBackground.style.backgroundColor = "#2a2929";
-        overlayBackground.style.width = "100%";
-        overlayBackground.style.height = "100vh";
-        overlayBackground.style.overflow = "scroll";
+        overlayBackground.style.display = "none";
 
         /*console.log("ok2" + initiated);*/
-        introSections[0].style.position ="fixed";
-        introSections[0].style.zIndex = "99";        
-        introSections[0].style.top = "0%";
-        introSections[0].style.marginLeft = "-350px";
-        introSections[0].style.left = "50%";
+        introSections[0].style.position ="static";
+        introSections[0].style.zIndex = "1";
+        introSections[0].style.width = "auto";
+        introSections[0].style.top = "";
+        introSections[0].style.marginLeft = "10px";
+        introSections[0].style.left = "";
 
-        introSections[1].style.position ="fixed";
-        introSections[1].style.zIndex = "99";        
-        introSections[1].style.marginLeft = "60px";
-        introSections[1].style.top = "0%";
-        introSections[1].style.left = "50%";
+        introSections[1].style.position ="static";
+        introSections[1].style.zIndex = "1";
+        introSections[1].style.width = "auto";
+        introSections[1].style.marginLeft = "350px";
+        introSections[1].style.top = "";
+        introSections[1].style.left = "";
 
-        introSections[2].style.position ="fixed";
-        introSections[2].style.zIndex = "99";
-        introSections[2].style.top = "55%";
+        introSections[2].style.position ="static";
+        introSections[2].style.zIndex = "0";
+        introSections[2].style.top = "";
         introSections[2].style.textAlign = "center";
-        introSections[2].style.left = "50%";
-        introSections[2].style.marginLeft = "-325px";
+        introSections[2].style.left = "";
+        introSections[2].style.marginLeft = "";
 
         battleText.style.border = "none";
-        battleText.style.width = "100%";
+        battleText.style.setProperty('width', '100%');
         /*MOBILE-VERSIONS*/
         } else {
 
         }
+        toggleDivChar2();
+        toggleBattleInstance();
+        toggleBattleInstance();
       
 }
