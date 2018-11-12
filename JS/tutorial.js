@@ -23,10 +23,20 @@ function startTutorial () {
    surroundings.style.display = "none";
    /*BIG-SCREENS*/
    if (viewportWidth > 1080) {
-        var overlayBackground = document.createElement('section');
-        overlayBackground.className = "overlayBackground";
         const introSections = document.getElementsByClassName("intro");
+        var overlayBackground = document.createElement('section');
         document.body.insertAdjacentElement("afterbegin", overlayBackground);
+        overlayBackground.style.backgroundColor = "#eee";
+        overlayBackground.className = "overlayBackground";
+
+        alert('You slowly start to come to your senses \n You cant seem to remember who you are or what you were doing...')
+        
+        var overlayForeground = document.createElement('section');
+        overlayForeground.className = "overlayForeground";
+        document.body.insertAdjacentElement("afterbegin", overlayForeground);
+        var name = askName();
+        saveName(name);
+
         overlayBackground.style.position = "fixed";
         overlayBackground.style.top = "0";
         overlayBackground.style.left = "0";
@@ -35,11 +45,6 @@ function startTutorial () {
         overlayBackground.style.height = "100vh";
         overlayBackground.style.overflow = "scroll";
         overlayBackground.style.zIndex = "15";
-        alert('You slowly start to come to your senses \n You cant seem to remember who you are or what you were doing...')
-        var overlayForeground = document.createElement('section');
-        overlayForeground.className = "overlayForeground"
-        var name = askName();
-        saveName(name);
         /*console.log("ok2" + initiated);
         !!!!! try to loop doubled values!!!
         */
@@ -68,6 +73,9 @@ function startTutorial () {
         const introSections = document.getElementsByClassName("intro");
         var overlayBackground = document.createElement('section');
         document.body.insertAdjacentElement("afterbegin", overlayBackground);
+        overlayBackground.className = "overlayBackground";
+        overlayBackground.style.backgroundColor = "#eee";
+
         overlayBackground.style.position = "fixed";
         overlayBackground.style.top = "0";
         overlayBackground.style.left = "0";
@@ -75,8 +83,12 @@ function startTutorial () {
         overlayBackground.style.width = "100%";
         overlayBackground.style.height = "100vh";
         overlayBackground.style.overflow = "scroll";
+
         alert('You slowly start to come to your senses \n You cant seem to remember who you are or what you were doing...')
+        
         var overlayForeground = document.createElement('section');
+        document.body.insertAdjacentElement("afterbegin", overlayForeground);
+        overlayForeground.className = "overlayForeground";
         var name = askName();
         saveName(name);
         /*console.log("ok2" + initiated);*/
@@ -109,6 +121,7 @@ function endTutorial () {
 
     console.log("test",surroundings);
     surroundings.style.display = "block";
+
     /*BIG-SCREENS*/
     if (viewportWidth > 1080) {
         const introSections = document.getElementsByClassName("intro");
