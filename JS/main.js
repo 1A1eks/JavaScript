@@ -569,3 +569,13 @@ document.getElementById("attack").addEventListener("click", (event)=>executeAtta
 document.getElementById("defend").addEventListener("click", );
 document.getElementById("escape").addEventListener("click", );
 */
+
+document.onkeydown = function(e) {
+    if (e.ctrlKey && e.keyCode === 83) {
+        console.log("saved!");
+        saveEverything();
+        //little notification to show it has saved.
+        
+        return false;
+    }
+};
