@@ -64,7 +64,7 @@ var NPC = {name : "", age : 0, itemsToGive : []};
 
 const giveItem  = (NPC) => {return(NPC.itemsToGive)};
 
-class character {
+class Character {
     constructor (name, lvl, hp, mana, str, dex, int, wis, luck, exp, lefthand, righthand) {
         this.name = name,
         this.lvl = lvl,
@@ -83,43 +83,43 @@ class character {
 
 }
 
-class human extends character {
+class Human extends Character {
     constructor (...args) {
         super(...args);
     }
 }
 
-class troll extends character {
+class Troll extends Character {
     constructor (...args ) {
         super(...args);
     }
 }
 
-class goblin extends character {
+class Goblin extends Character {
     constructor (...args ) {
         super(...args);
     }
 }
 
-class dwarf extends character {
+class dwarf extends Character {
     constructor (...args ) {
         super(...args);
     }
 }
 
-class bear extends character {
+class Bear extends Character {
     constructor (...args) {
         super(...args);
     }
 }
 
-class boar extends character {
+class boar extends Character {
     constructor (...args) {
         super(...args);
     }
 }
 
-class bunny extends character {
+class Bunny extends Character {
     constructor (...args) {
         super(...args);
     }
@@ -132,7 +132,7 @@ function makeFist () {
 //let fist = new item ("fist", 1, 0, 1, 0, false);
 
 function createHuman () {
-    let char = new human (generateName(), 1, makeHitPoints(), 0, Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9),
+    let char = new Human (generateName(), 1, makeHitPoints(), 0, Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9), Math.ceil(Math.random()*9),
     Math.ceil(Math.random()*5), 0, makeFist(), makeFist());
     return(char);
 }
@@ -167,7 +167,7 @@ function createDungeon (difficulty) {
 }
 */
 
-/*============Loading Game===========
+/*============Loading Game & Toggling functions===========
 check for previous starting point or save first & other stuff
 
 Only to make sure page is displayed properly, + menu functions for mobile.
@@ -194,6 +194,8 @@ var statsChar1 = document.getElementById('statsChar1');
 var statsChar2 = document.getElementById('statsChar2');
 var statsCharWeapon1 = document.getElementById('statsCharW1');
 var statsCharWeapon2 = document.getElementById('statsCharW2');
+/*toggleable elements for tutorial and maybe later*/
+const charEnemy = document.getElementById('char2');
 
 
 function showExternalLinksClick() {
@@ -218,22 +220,31 @@ function showTopNav() {
     }
 }
 
-function toggleBattleInstanceOn () {
+function toggleBattleInstance () {
+    if (attackCommandDiv.style.display === "none" || hideCommandDiv.style.display === "block") {
     attackCommandDiv.style.display = "block";
     defendCommandDiv.style.display = "block";
     escapeCommandDiv.style.display = "block";
     lookAroundCommandDiv.style.display = "none";
     restCommandDiv.style.display = "none";
     hideCommandDiv.style.display = "none";
-}
-
-function toggleBattleInstanceOff () {
+    } else {        
     attackCommandDiv.style.display = "none";
     defendCommandDiv.style.display = "none";
     escapeCommandDiv.style.display = "none";
     lookAroundCommandDiv.style.display = "block";
     restCommandDiv.style.display = "block";
-    hideCommandDiv.style.display = "block";    
+    hideCommandDiv.style.display = "block"; 
+    }
+}
+
+function toggleBattleInstanceOff () {   
+    attackCommandDiv.style.display = "none";
+    defendCommandDiv.style.display = "none";
+    escapeCommandDiv.style.display = "none";
+    lookAroundCommandDiv.style.display = "none";
+    restCommandDiv.style.display = "none";
+    hideCommandDiv.style.display = "none"; 
 }
 
 function toggleCharStats1 () {
@@ -266,6 +277,14 @@ function toggleCharStatsWeapon2 () {
     } else {
         statsCharWeapon2.style.display = "block";
     }
+}
+
+function toggleDivChar2 () {
+    if (charEnemy.style.display === "none") {
+    charEnemy.style.display = "block";  
+    } else {
+        charEnemy.style.display = "none"; 
+    }  
 }
 
 //*==================-Gameplay--visuals/html&CSS-==========================
@@ -400,46 +419,9 @@ function counterAttack () {
 
 //==============-Visual output from combat-=====================
 
-function executeAttack () {
-   let returned =  attack(allyArray[0], enemyArray[0]);
-   allyArray[0].hp-=returned[1];
-   enemyArray[0].hp-=returned[2];
-   let messagep = "";
-   if(document.getElementsByClassName('battleText')[0].childElementCount > 8) {
-    if (enemyArray[0].hp <= 0) {
-        enemyArray[0].hp = 0;
-        messagep     = "You killed the enemy."
-    adjustBattleText(messagep);
-    refreshVisuals();
-    return;
-    }     
-    switch (returned[0]) {
-         case "miss":
-         messagep         = "You missed.."
-         break;
-         case "You hit..":
-         messagep         = "You hit the enemy " + enemyArray[0].name + " for " + returned[2] + " damage!"
-         break;
-         case "~Critical Hit!~":
-         messagep         = "~Critical Hit!~ \n  You Critical hit for " + returned[2] + " damage!"
-         break;
-    }
-    adjustBattleText(messagep);
-    refreshVisuals();
-    return;
-   }
-
-   //===killing the enemy
-   if (enemyArray[0].hp <= 0) {
-       enemyArray[0].hp = 0;
-       messagep    = "You killed the enemy."
-    adjustBattleText(messagep);
-    toggleBattleInstanceOff();
-    refreshVisuals();
-    return;
-   }
-    
-   switch (returned[0]) {
+function attackMessage (message) {
+    let messagep = "";
+    switch (message) {        
         case "miss":
         messagep        = "You missed.."
         break;
@@ -448,8 +430,47 @@ function executeAttack () {
         break;
         case "~Critical Hit!~":
         messagep        = "~Critical Hit!~ \n  You Critical hit for " + returned[2] + " damage!"
-        break;
+        break;       
+    }
+    return messagep;
+}
+
+function isEnemyDead (Character) {
+    if(Character.hp <= 0) {
+        adjustBattleText(`You killed the enemy ${Character.name}`);
+    }
+}
+
+function executeAttack () {
+   let returned =  attack(allyArray[0], enemyArray[0]);
+   allyArray[0].hp-=returned[1];
+   enemyArray[0].hp-=returned[2];
+   let messagep = "";
+
+   if(document.getElementsByClassName('battleText')[0].childElementCount > 8) {
+    if (enemyArray[0].hp <= 0) {
+        enemyArray[0].hp = 0;
+        adjustBattleText(`You killed the enemy ${Character.name}`);
+        toggleBattleInstance();
+        refreshVisuals();
+        return;
+    } else { 
+        attackMessage(returned[0]);
+        adjustBattleText(messagep);
+        refreshVisuals();
+        return;
+    }
    }
+
+   //===killing the enemy
+   if (enemyArray[0].hp <= 0) {
+       enemyArray[0].hp = 0;
+        adjustBattleText(`You killed the enemy ${Character.name}`);
+        toggleBattleInstance();
+        refreshVisuals();
+        return;
+   }   
+   attackMessage(returned[0]);
    adjustBattleText(messagep);
    refreshVisuals();
 }
@@ -457,31 +478,23 @@ function executeAttack () {
 
 function adjustBattleText(message1) {
 
-    if (document.getElementsByClassName('battleText')[0].childElementCount < 10){
-    var count = document.getElementsByClassName('battleText')[0].childElementCount -1;
-    console.log(document.getElementsByClassName('battleText')[0].childElementCount + "   " + `p${count}`);
-     
+    if (document.getElementsByClassName('battleText')[0].childElementCount < 10) {
+    var count = document.getElementsByClassName('battleText')[0].childElementCount -1;     
     let p = `<p id="p${document.getElementsByClassName('battleText')[0].childElementCount}">paragraph</p>`;
-    console.log(p);
-
     document.getElementById(`p${count}`).insertAdjacentHTML('afterend', p);
-
-    document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML 
-    = message1;
-    //document.getElementById(`p${count}`).scrollIntoView();
+    document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML = message1;
     return;
     }
 
-    var count = document.getElementsByClassName('battleText')[0].childElementCount -1;
-    console.log(document.getElementsByClassName('battleText')[0].childElementCount + "   " + `p${count}`);
 
+    var count = document.getElementsByClassName('battleText')[0].childElementCount -1;
     let temporary = "";
     for (let i = count; i >  0; i--) {
         temporary = document.getElementsByTagName('p')[i].innerHTML;
         document.getElementsByTagName('p')[i].innerHTML = message1;
         message1 = temporary;
     }
-    //document.getElementById(`p${count}`).scrollIntoView();
+
     return;
 }
 
@@ -497,7 +510,7 @@ function InitiateAll () {
         enemyArray.push(createHuman());
     }
     initiateShop();
-    introStart();    
+    startTutorial();    
     initiated=true;
 }
 
@@ -511,7 +524,7 @@ if(initiated===false){
 
 //===========-Actually calling functions to play-=============================
 
-InitiateAll();
+
 refreshVisuals();
 
 document.getElementById("attack").addEventListener("click", (event)=>executeAttack());

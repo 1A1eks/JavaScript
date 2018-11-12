@@ -9,8 +9,21 @@ const buttonStatsCharW1 = document.getElementById('statsButtonCharW1');
 const buttonStatsCharW2 = document.getElementById('statsButtonCharW2');
 const surroundings = document.getElementById('surroundings');
 
+function askName () {
+    let name = prompt ('...right, your name was ');
+    return name;
+}
 
-function introStart () {   
+function saveName (string) {
+    allyArray[0].name = string;
+}
+
+function startTutorial () { 
+    
+    alert('You slowly start to come to your senses \n You cant seem to remember who you are or what you were doing...')
+
+    var name = askName();
+    saveName(name);
     
     if (initiated === false) {          
 
@@ -30,7 +43,9 @@ function introStart () {
         overlayBackground.style.overflow = "scroll";
         overlayBackground.style.zIndex = "15";
 
-        /*console.log("ok2" + initiated);*/
+        /*console.log("ok2" + initiated);
+        !!!!! try to loop doubled values!!!
+        */
         introSections[0].style.position ="fixed";
         introSections[0].style.zIndex = "100";
         introSections[0].style.width = "50%";
@@ -94,5 +109,84 @@ function introStart () {
         } else {
 
         }
-    }    
+        toggleDivChar2();
+        toggleBattleInstanceOff();
+    }  
+}
+
+function endTutorial () {
+
+    console.log("test",surroundings);
+        surroundings.style.display = "block";
+        /*BIG-SCREENS*/
+        if (viewportWidth > 1080) {
+        const introSections = document.getElementsByClassName("intro");
+
+        overlayBackground = document.getElementsByTagName('div')[0];
+        overlayBackground.style.display = "none";
+
+        /*console.log("ok2" + initiated);*/
+        introSections[0].style.position ="static";
+        introSections[0].style.zIndex = "1";
+        introSections[0].style.width = "auto";
+        introSections[0].style.top = "";
+        introSections[0].style.marginLeft = "10px";
+        introSections[0].style.left = "";
+
+        introSections[1].style.position ="static";
+        introSections[1].style.zIndex = "1";
+        introSections[1].style.width = "auto";
+        introSections[1].style.marginLeft = "350px";
+        introSections[1].style.top = "";
+        introSections[1].style.left = "";
+
+        introSections[2].style.position ="static";
+        introSections[2].style.zIndex = "0";
+        introSections[2].style.top = "";
+        introSections[2].style.textAlign = "center";
+        introSections[2].style.left = "";
+        introSections[2].style.marginLeft = "";
+
+        battleText.style.border = "none";
+        battleText.style.setProperty('width', '100%');
+        /*MEDIUM-SCREENS  */  
+        } else if (viewportWidth > 720) {
+            const introSections = document.getElementsByClassName("intro");
+        var overlayBackground = document.createElement('div');
+        document.body.insertAdjacentElement("afterbegin", overlayBackground);
+
+        overlayBackground.style.display = "none";
+
+        /*console.log("ok2" + initiated);*/
+        introSections[0].style.position ="static";
+        introSections[0].style.zIndex = "1";
+        introSections[0].style.width = "auto";
+        introSections[0].style.top = "";
+        introSections[0].style.marginLeft = "10px";
+        introSections[0].style.left = "";
+
+        introSections[1].style.position ="static";
+        introSections[1].style.zIndex = "1";
+        introSections[1].style.width = "auto";
+        introSections[1].style.marginLeft = "350px";
+        introSections[1].style.top = "";
+        introSections[1].style.left = "";
+
+        introSections[2].style.position ="static";
+        introSections[2].style.zIndex = "0";
+        introSections[2].style.top = "";
+        introSections[2].style.textAlign = "center";
+        introSections[2].style.left = "";
+        introSections[2].style.marginLeft = "";
+
+        battleText.style.border = "none";
+        battleText.style.setProperty('width', '100%');
+        /*MOBILE-VERSIONS*/
+        } else {
+
+        }
+        toggleDivChar2();
+        toggleBattleInstance();
+        toggleBattleInstance();
+      
 }
