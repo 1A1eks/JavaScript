@@ -8,6 +8,15 @@ const buttonStatsChar2 = document.getElementById('statsButtonChar2');
 const buttonStatsCharW1 = document.getElementById('statsButtonCharW1');
 const buttonStatsCharW2 = document.getElementById('statsButtonCharW2');
 const surroundings = document.getElementById('surroundings');
+var tutorialStarted = false;
+var tutorial_Step = 0;
+var pressed = false;
+
+function pressedReset () {
+    setTimeout(()=>{pressed=false}, 1000);
+}
+
+
 
 function askName () {
     let name = prompt ('...right, your name was ');
@@ -19,6 +28,8 @@ function saveName (string) {
 }
 
 function startTutorial () { 
+
+    tutorialStarted = true;
 
    surroundings.style.display = "none";
    /*BIG-SCREENS*/
@@ -115,10 +126,17 @@ function startTutorial () {
    }
    toggleDivChar2();
    toggleBattleInstanceOff();     
+   let skipButton = document.getElementById('skipButton');
+   let skipButtonText = document.getElementById('skipButtonText');
+
+   skipButton.style.display = "block";
+   skipButtonText.addEventListener("onclick", (event)=>endTutorial());
+
 }
 
 function endTutorial () {
 
+    tutorialStarted = false;
     console.log("test",surroundings);
     surroundings.style.display = "block";
 
@@ -197,6 +215,67 @@ function endTutorial () {
     }
     toggleDivChar2();
     toggleBattleInstance();
-    toggleBattleInstance();
-      
+    toggleBattleInstance();  
+    let skipButton = document.getElementById('skipButton');
+    let skipButtonText = document.getElementById('skipButtonText');
+ 
+    skipButton.style.display = "block";
+    console.log("what?why?");
+    skipButtonText.removeEventListener("onclick"); 
 }
+
+//==========-Control-For-Tutorial-=========
+
+function tutorialProgress () {
+    if (tutorialStarted && pressed === false) {
+        switch (tutorial_Step) {
+            case 0:
+            console.log("test", tutorial_Step);
+            break;
+            case 1: 
+
+            break;
+            case 2:
+
+            break;
+            case 3: 
+
+            break;
+            case 4:
+
+            break;
+            case 5: 
+
+            break;
+            case 6:
+
+            break;
+            case 7: 
+
+            break;
+            case 8:
+
+            break;
+            case 9: 
+
+            break;
+            case 10:
+
+            break;
+            case 11: 
+
+            break;
+        }
+
+        tutorial_Step++;
+        pressed = true;
+        pressedReset();
+
+        console.log("after switch", tutorial_Step, tutorialStarted);
+
+        
+    }
+}
+
+document.addEventListener("keydown", (event)=>tutorialProgress());
+
