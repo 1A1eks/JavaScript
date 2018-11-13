@@ -323,3 +323,25 @@ main {
 #p0 {
     display: none;
 }
+
+#skipButton {
+    position: fixed;
+    padding: 0em ;
+    top: 85%;
+    left: 85%;
+    margin-top: 0;
+    margin-bottom: 0;    
+    width: auto;
+    height: auto;
+    z-index: 150;
+}
+
+#skipButtontext {
+    padding: 0.5em;
+    margin: 0;
+}
+
+#skipButton:hover {
+    background-color: #5f5d5d;
+    cursor: grab;
+}

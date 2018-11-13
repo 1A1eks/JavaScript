@@ -1,6 +1,14 @@
 
 let initiated = false;
 
+/*
+<link href="Fonts/black_castle/BlackCastleMF.ttf" rel='preload' type='text/css'>
+<link href="Fonts/dungeon_sn/DUNGRG__.TTF" rel='preload' type='text/css'>
+<link href="Fonts/karmatic_arcade/ka1.ttf" rel='preload' type='text/css'>
+<link href="Fonts/old_wise_lord/Old Wise Lord.otf" rel='preload' type='text/css'>
+<link href="Fonts/augusta/Augusta-Shadow.ttf" rel='preload' type='text/css'>
+//   */
+
 //=======Some-generators-and-vars-to-keep-track-of-stuff-============
 
 const generateName = () => {
@@ -166,6 +174,23 @@ function createDungeon (difficulty) {
 
 }
 */
+
+//============-Getting-And-Setting-Cookies-/-localstorage-==============
+
+function saveEverything () {
+    localStorage.setItem('allyArray', JSON.stringify(allyArray));
+    localStorage.setItem('enemyArray', JSON.stringify(enemyArray));
+
+}
+
+function clearEverything () {
+    localStorage.clear();
+}
+
+function loadLocalStorage () {
+    allyArray = JSON.parse(localStorage.getItem('allyArray'));
+    enemyArray = JSON.parse(localStorage.getItem('enemyArray'));
+}
 
 /*============Loading Game & Toggling functions===========
 check for previous starting point or save first & other stuff
@@ -505,21 +530,32 @@ function adjustBattleText(message1) {
 
 
 var introSections = document.getElementsByClassName("intro");
-function InitiateAll () {
-    if(enemyArray.length < 1){
-        enemyArray.push(createHuman());
-    }
-    initiateShop();
-    startTutorial();    
+function initiateAll () {
+    
+    initiateShop(); 
     initiated=true;
 }
 
 
+if(localStorage.getItem('allyArray')) {
+    loadLocalStorage();
+    initiateAll();
+    initiated === true
+} else {
+    //console.log("localstorage doesn't exist: ok?")
+};
+
 if(initiated===false){
     const MC = createHuman();
     allyArray.push(MC);
-    InitiateAll();
+    if(enemyArray.length < 1){
+        enemyArray.push(createHuman());
+    }
+
+    //console.log("initiated = false: ok?")
+    initiateAll();
     initiated=true;
+    startTutorial();   
 };
 
 //===========-Actually calling functions to play-=============================
@@ -533,3 +569,13 @@ document.getElementById("attack").addEventListener("click", (event)=>executeAtta
 document.getElementById("defend").addEventListener("click", );
 document.getElementById("escape").addEventListener("click", );
 */
+
+document.onkeydown = function(e) {
+    if (e.ctrlKey && e.keyCode === 83) {
+        console.log("saved!");
+        saveEverything();
+        //little notification to show it has saved.
+        
+        return false;
+    }
+};
