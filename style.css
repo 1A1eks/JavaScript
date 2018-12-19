@@ -64,6 +64,11 @@
 
     .navving {
         display: inline;
+        margin-right: .8em;
+    }
+
+    .navving:hover {
+        background-color:  rgb(80, 78, 78);
     }
 
     #topnavList {
@@ -76,6 +81,10 @@
         background-color: #18181a;
         padding: 0;
         margin: 0;
+    }
+
+    #hardReset {
+        float: right;
     }
 
     .topbarred {
@@ -337,6 +346,7 @@ main {
 }
 
 #skipButtontext {
+    display: none;
     padding: 0.5em;
     margin: 0;
 }

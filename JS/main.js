@@ -89,6 +89,90 @@ class Character {
         this.righthand = righthand        
     }
 
+
+    //============-Gameplay-Combat-=================
+    //                 ||
+    //                 \/
+    //=========-Goes-into-character-Class-======================
+    //or subclass if different way to calculate is needed
+
+
+    //check if a char is dead
+    isCharDead () {
+    if(this.hp <= 0) {
+        this.hp = 0;
+        adjustBattleText(`You killed the enemy ${Character.name}`);
+        return true;
+        }
+    return false;
+    }
+
+    //everything that happens in 1 attack round
+    attack (characterBB) {
+        let critical = this.isCriticalHit();
+        let dmgBB = this.attackVal() * critical;
+    
+        let message1 = "";
+        switch (critical){
+            case (0):
+            message1 = "miss";
+            break;
+            case (1):
+            message1 = "You hit..";
+            break;
+            case(2):
+            message1 = "~Critical Hit!~"
+            break;
+        }
+        console.log(message1 + "  " + dmgBB);
+        //counterattack?  TBD
+        let dmgAA = 0;    
+        let message2 = "";    
+        return([message1, dmgAA, dmgBB, message2]);
+    }
+
+    //Random way to determine attack-value
+    attackVal () {
+        let maxValue = this.lvl + this.lefthand.str * this.str;
+        console.log(1 + " maxvalue: " + maxValue);
+        maxValue = Math.pow(maxValue, (this.str + this.lefthand.str) / (this.lvl * 10 + this.lefthand.minlvl * 10))
+        console.log(maxValue);
+        let minValue = this.lvl - 1 + Math.floor(this.str/(this.lvl + 3));
+        console.log("minvalue: " + minValue);
+    
+        let attackValue = Math.ceil(Math.random() * ( maxValue - minValue ) ) + minValue;
+    
+        //let attackValue = this.lvl + Math.ceil(Math.random()*this.lefthand.str) * Math.floor(Math.random()*this.str);
+        //attackValue = Math.pow(attackValue, (this.str + this.lefthand.str) / (this.lvl * 10 + this.lefthand.minlvl * 10))
+        return attackValue;
+    }
+
+    isCriticalHit () {
+        let hit =  Math.floor(Math.random()*9);
+        if (hit===0) {
+            return(0);
+        } else if (Math.floor(hit /8) + this.luck * 0.01 > 1) {
+            return(2);
+        } else {return(1);
+        }
+    }
+
+    //TBD
+    defendVal () {
+
+    }
+
+    getHit () {
+
+    }
+    running () {
+
+    }
+
+    counterAttack () {
+
+    }
+
 }
 
 class Human extends Character {
@@ -180,7 +264,7 @@ function createDungeon (difficulty) {
 function saveEverything () {
     localStorage.setItem('allyArray', JSON.stringify(allyArray));
     localStorage.setItem('enemyArray', JSON.stringify(enemyArray));
-
+    //everything else there is to save?
 }
 
 function clearEverything () {
@@ -213,7 +297,6 @@ const defendCommandDiv = document.getElementById('defend');
 const escapeCommandDiv = document.getElementById('escape');
 const lookAroundCommandDiv = document.getElementById('lookAround');
 const restCommandDiv = document.getElementById('rest');
-const hideCommandDiv = document.getElementById('hide');
 /*elements needed for overlay*/
 var statsChar1 = document.getElementById('statsChar1');
 var statsChar2 = document.getElementById('statsChar2');
@@ -246,20 +329,18 @@ function showTopNav() {
 }
 
 function toggleBattleInstance () {
-    if (attackCommandDiv.style.display === "none" || hideCommandDiv.style.display === "block") {
+    if (attackCommandDiv.style.display === "none" || restCommandDiv.style.display === "block") {
     attackCommandDiv.style.display = "block";
     defendCommandDiv.style.display = "block";
     escapeCommandDiv.style.display = "block";
     lookAroundCommandDiv.style.display = "none";
     restCommandDiv.style.display = "none";
-    hideCommandDiv.style.display = "none";
     } else {        
     attackCommandDiv.style.display = "none";
     defendCommandDiv.style.display = "none";
     escapeCommandDiv.style.display = "none";
     lookAroundCommandDiv.style.display = "block";
     restCommandDiv.style.display = "block";
-    hideCommandDiv.style.display = "block"; 
     }
 }
 
@@ -269,7 +350,6 @@ function toggleBattleInstanceOff () {
     escapeCommandDiv.style.display = "none";
     lookAroundCommandDiv.style.display = "none";
     restCommandDiv.style.display = "none";
-    hideCommandDiv.style.display = "none"; 
 }
 
 function toggleCharStats1 () {
@@ -372,115 +452,42 @@ function refreshVisuals() {
     priceWeaponB.innerHTML = enemyArray[0].lefthand.price;
 }
 
-//============-Gameplay-Combat-=================
-
-//=========-Goes-into-character-Class?-======================
-
-function attack (characterAA, characterBB) {
-    let critical = isCriticalHit(characterAA);
-    let dmgBB = attackVal(characterAA) * critical;
-
-    let message1 = "";
-    switch (critical){
-        case (0):
-        message1 = "miss";
-        break;
-        case (1):
-        message1 = "You hit..";
-        break;
-        case(2):
-        message1 = "~Critical Hit!~"
-        break;
-    }
-    console.log(message1 + "  " + dmgBB);
-    //counterattack?
-    let dmgAA = 0;
-
-    let message2 = "";
-
-    return([message1, dmgAA, dmgBB, message2]);
-}
-
-function attackVal (character) {
-    let maxValue = character.lvl + character.lefthand.str * character.str;
-    console.log(1 + " maxvalue: " + maxValue);
-    maxValue = Math.pow(maxValue, (character.str + character.lefthand.str) / (character.lvl * 10 + character.lefthand.minlvl * 10))
-    console.log(maxValue);
-    let minValue = character.lvl - 1 + Math.floor(character.str/(character.lvl + 3));
-    console.log("minvalue: " + minValue);
-
-    let attackValue = Math.ceil(Math.random() * ( maxValue - minValue ) ) + minValue;
-
-    //let attackValue = character.lvl + Math.ceil(Math.random()*character.lefthand.str) * Math.floor(Math.random()*character.str);
-    //attackValue = Math.pow(attackValue, (character.str + character.lefthand.str) / (character.lvl * 10 + character.lefthand.minlvl * 10))
-    return attackValue;
-}
-
-function defendVal () {
-
-}
-
-function getHit () {
-
-}
-
-function isCriticalHit (character) {
-    let hit =  Math.floor(Math.random()*9);
-    if (hit===0) {
-        return(0);
-    } else if (Math.floor(hit /8) + this.luck * 0.01 > 1) {
-        return(2);
-    } else {return(1);
-    }
-}
-
-function running () {
-
-}
-
-function counterAttack () {
-
-}
-
 //==============-Visual output from combat-=====================
 
-function attackMessage (message) {
+//hardcoded for now, FIRST
+function attackMessage (attackResult) {
     let messagep = "";
-    switch (message) {        
+    switch (attackResult[0]) {        
         case "miss":
         messagep        = "You missed.."
         break;
         case "You hit..":
-        messagep        = "You hit the enemy " + enemyArray[0].name + " for " + returned[2] + " damage!"
+        messagep        = "You hit the enemy " + enemyArray[0].name + " for " + attackResult[2] + " damage!"
         break;
         case "~Critical Hit!~":
-        messagep        = "~Critical Hit!~ \n  You Critical hit for " + returned[2] + " damage!"
+        messagep        = "~Critical Hit!~ \n  \n You hit for " + attackResult[2] + " damage!"
         break;       
     }
     return messagep;
 }
 
-function isEnemyDead (Character) {
-    if(Character.hp <= 0) {
-        adjustBattleText(`You killed the enemy ${Character.name}`);
-    }
-}
 
+//attack returns [(msg),(dmg done to A),(dmg done to B),(msg)]
 function executeAttack () {
-   let returned =  attack(allyArray[0], enemyArray[0]);
-   allyArray[0].hp-=returned[1];
-   enemyArray[0].hp-=returned[2];
+   let attackResult =  allyArray[0].attack(enemyArray[0]);
+   allyArray[0].hp -= attackResult[1];
+   enemyArray[0].hp -= attackResult[2];
    let messagep = "";
-
    if(document.getElementsByClassName('battleText')[0].childElementCount > 8) {
-    if (enemyArray[0].hp <= 0) {
-        enemyArray[0].hp = 0;
+    if (enemyArray[0].isCharDead) {
+        
         adjustBattleText(`You killed the enemy ${Character.name}`);
         toggleBattleInstance();
         refreshVisuals();
         return;
     } else { 
-        attackMessage(returned[0]);
+        messagep = attackMessage(attackResult);
+        console.log(messagep);
         adjustBattleText(messagep);
         refreshVisuals();
         return;
@@ -488,21 +495,18 @@ function executeAttack () {
    }
 
    //===killing the enemy
-   if (enemyArray[0].hp <= 0) {
-       enemyArray[0].hp = 0;
-        adjustBattleText(`You killed the enemy ${Character.name}`);
-        toggleBattleInstance();
-        refreshVisuals();
-        return;
-   }   
-   attackMessage(returned[0]);
+   if (enemyArray[0].isCharDead()){
+    toggleBattleInstance();
+    refreshVisuals();
+    return;
+   };
+    messagep = attackMessage(attackResult);
    adjustBattleText(messagep);
    refreshVisuals();
 }
 // seperate function to adjust the battletext innerhtml so problems might be avoided...
 
 function adjustBattleText(message1) {
-
     if (document.getElementsByClassName('battleText')[0].childElementCount < 10) {
     var count = document.getElementsByClassName('battleText')[0].childElementCount -1;     
     let p = `<p id="p${document.getElementsByClassName('battleText')[0].childElementCount}">paragraph</p>`;
@@ -510,8 +514,6 @@ function adjustBattleText(message1) {
     document.getElementsByTagName('p')[document.getElementsByTagName('p').length-1].innerHTML = message1;
     return;
     }
-
-
     var count = document.getElementsByClassName('battleText')[0].childElementCount -1;
     let temporary = "";
     for (let i = count; i >  0; i--) {
@@ -519,19 +521,14 @@ function adjustBattleText(message1) {
         document.getElementsByTagName('p')[i].innerHTML = message1;
         message1 = temporary;
     }
-
     return;
 }
+////maybe could be better? TBD
 
-////needs updating for performance!------------------------------------------------------------------------------
-
-// returns message, dmgA, dmgB, message if charB counterattacks
-//    attack(allyArray[0], enemyArray[0]);
-
+//==========-Initiating-localstorage-or coockie?-==========
 
 var introSections = document.getElementsByClassName("intro");
-function initiateAll () {
-    
+function initiateAll () {    
     initiateShop(); 
     initiated=true;
 }
@@ -551,18 +548,15 @@ if(initiated===false){
     if(enemyArray.length < 1){
         enemyArray.push(createHuman());
     }
-
     //console.log("initiated = false: ok?")
     initiateAll();
     initiated=true;
-    startTutorial();   
+    //startTutorial();   
 };
 
 //===========-Actually calling functions to play-=============================
 
-
 refreshVisuals();
-
 document.getElementById("attack").addEventListener("click", (event)=>executeAttack());
 
 /*
@@ -574,8 +568,7 @@ document.onkeydown = function(e) {
     if (e.ctrlKey && e.keyCode === 83) {
         console.log("saved!");
         saveEverything();
-        //little notification to show it has saved.
-        
+        //little notification to show it has saved.        
         return false;
     }
 };
